@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuidv4 } from 'uuid'
 
 const initialState = {
   userId: null,
@@ -26,9 +27,22 @@ const userSlice = createSlice({
     setInitialState: (state, action) => {
       return initialState
     },
+    signOut: (state) => {
+      state.userId = null
+      state.email = null
+      state.password = null
+      state.error = null
+    },
   },
 })
 
-export const { setUserId, setEmail, setPassword, setError, setInitialState } = userSlice.actions
+export const { setUserId, setEmail, setPassword, setError, setInitialState, signOut } = userSlice.actions
+
+export const generateUUID = () => {
+  return (dispatch) => {
+    const userId = uuidv4()
+    dispatch(setUserId(userId))
+  }
+}
 
 export default userSlice.reducer

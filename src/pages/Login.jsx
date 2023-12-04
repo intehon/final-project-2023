@@ -1,14 +1,15 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux'
-import { setEmail, setPassword, setError } from '../reducers/userSlice'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setEmail, setPassword, setError, generateUUID } from '../reducers/userSlice'
 import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
   const [email, setEmailValue] = useState('')
-  const [password, setPasswordValue]   = useState('')
+  const [password, setPasswordValue] = useState('')
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const userId = useSelector(state => state.user.userId) // Retrieve userId from Redux state
 
   const handleLogin = (event) => {
     event.preventDefault()
@@ -22,13 +23,29 @@ export const Login = () => {
       dispatch(setEmail(email))
       dispatch(setPassword(password))
       dispatch(setError('')) // Clear error message in Redux state
-      console.log('Login successful')
-      
+
+      // Dispatch action to generate a UUID for the user if it's not already generated
+      if (!userId) {
+        dispatch(generateUUID())
+      }
+
+      const user = {
+        userId: userId || generateRandomUserId(), // Use existing userId or generate a random one
+        email,
+        password,
+      }
+
+      localStorage.setItem('userData', JSON.stringify(user))
       navigate('/home') // Navigate to the '/home' route after successful login
     } else {
       // Unsuccessful login 
       dispatch(setError('Invalid email or password'))
     }
+  }
+
+  // Function to generate a random userId if not available
+  const generateRandomUserId = () => {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
   }
 
   return (

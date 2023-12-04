@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { setEmail, setPassword } from '../reducers/userSlice'
 
 export const Signup = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [email, setEmailValue] = useState('')
   const [password, setPasswordValue] = useState('')
 
