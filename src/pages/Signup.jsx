@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setEmail, setPassword } from '../reducers/userSlice'
+import { setEmail, setPassword, setAuthenticated } from '../reducers/userSlice'
 
 export const Signup = () => {
   const dispatch = useDispatch()
@@ -15,6 +15,7 @@ export const Signup = () => {
 
     dispatch(setEmail(email))
     dispatch(setPassword(password))
+    dispatch(setAuthenticated(false)) //set authentication to false when signing up
 
     // Clear form fields after submission
     setEmailValue('')

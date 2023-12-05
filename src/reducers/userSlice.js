@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { v4 as uuidv4 } from 'uuid'
 
 const initialState = {
-  userId: null,
+  authenticated: false,
   email: null,
   password: null,
   error: null,
@@ -12,9 +11,6 @@ const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
   reducers: {
-    setUserId: (state, action) => {
-      state.userId = action.payload
-    },
     setEmail: (state, action) => {
       state.email = action.payload
     },
@@ -33,16 +29,12 @@ const userSlice = createSlice({
       state.password = null
       state.error = null
     },
+    setAuthenticated: (state, action) => {
+      state.authenticated = action.payload
+    }
   },
 })
 
-export const { setUserId, setEmail, setPassword, setError, setInitialState, signOut } = userSlice.actions
-
-export const generateUUID = () => {
-  return (dispatch) => {
-    const userId = uuidv4()
-    dispatch(setUserId(userId))
-  }
-}
+export const { setAuthenticated, setEmail, setPassword, setError, setInitialState, signOut } = userSlice.actions
 
 export default userSlice.reducer

@@ -1,9 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
-import { setUserId, setEmail, setPassword, setError } from './reducers/userSlice'
+import { setEmail, setPassword, setError } from './reducers/userSlice'
 import userReducer from './reducers/userSlice'
 import itemsReducer from './reducers/itemSlice'
+import { Provider } from 'react-redux'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { setItems } from './reducers/itemSlice'
 import { WelcomePage } from './pages/WelcomePage'
 import { Home } from './pages/Home'
@@ -13,14 +13,14 @@ const store = configureStore({
   reducer: {
     user: userReducer,
     items: itemsReducer,
-  },
+  }
 })
 
 
 // Load user data from localStorage
 const userData = JSON.parse(localStorage.getItem('user'))
 if (userData) {
-  store.dispatch(setUserId(userData.userId))
+  // store.dispatch(setUserId(userData.userId))
   store.dispatch(setEmail(userData.email))
   store.dispatch(setPassword(userData.password))
   store.dispatch(setError(userData.error))
@@ -34,6 +34,7 @@ if (storedItems) {
 }
 
 export const App = () => {
+
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -46,5 +47,5 @@ export const App = () => {
         </Routes>
       </BrowserRouter>
     </Provider>
-  )
+    )
 }

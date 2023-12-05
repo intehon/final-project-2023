@@ -1,10 +1,11 @@
 import React from 'react'
 import { Signup } from './Signup'
-import { Login } from './Login'
+import { Header } from '../components/Header'
 
 export const WelcomePage = () => {
   return (
     <div>
+      <Header />
       <h1>Welcome to Swapify</h1>
       <p>
         The platform will allow users to list items they are willing to share or donate, and browse items
@@ -17,11 +18,6 @@ export const WelcomePage = () => {
       <div>
         <h2>Signup</h2>
         <Signup />
-      </div>
-
-      <div>
-        <h2>Login</h2>
-        <Login />
       </div>
     </div>
   )

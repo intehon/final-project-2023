@@ -5,16 +5,16 @@ import { ItemListing } from '../components/ItemListing'
 import { Header } from '../components/Header'
 
 export const Home = () => {
-    const userId = useSelector(state => state.user.userId) //Get userID from redux
+    // const userId = useSelector(state => state.user.userId) //Get userID from redux
+    const email = useSelector(state => state.user.email)
     const navigate = useNavigate()
-
 
     useEffect(() => {
      //If not signed in, return to welcome page
-        if (!userId) {
+        if (!email) {
           navigate('/')
         }
-      }, [userId, navigate])
+      }, [email, navigate])
 
     return (
         <div>
