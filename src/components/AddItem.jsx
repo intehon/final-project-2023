@@ -12,7 +12,7 @@ const FormContainer = styled.div`
   border: 1px solid #ccc;
   border-radius: 8px;
   padding-right: 35px;
-`;
+`
 
 const TitleInput = styled.input`
   width: 100%;
@@ -20,7 +20,7 @@ const TitleInput = styled.input`
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-`;
+`
 
 const DescriptionTextarea = styled.textarea`
   width: 100%;
@@ -28,7 +28,7 @@ const DescriptionTextarea = styled.textarea`
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-`;
+`
 
 const TagsInput = styled.input`
   width: 100%;
@@ -36,11 +36,11 @@ const TagsInput = styled.input`
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-`;
+`
 
 const FileInput = styled.input`
   margin-bottom: 10px;
-`;
+`
 
 const AddButton = styled.button`
   padding: 8px 16px;
@@ -53,11 +53,11 @@ const AddButton = styled.button`
   &:hover {
     background-color: #e5989b; 
   }
-`;
+`
 
 const ErrorMessage = styled.p`
   color: red;
-`;
+`
 
 export const AddItem = () => {
   const dispatch = useDispatch()

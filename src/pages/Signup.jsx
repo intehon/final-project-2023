@@ -6,19 +6,19 @@ import styled from '@emotion/styled'
 
 const FormGroup = styled.div`
   margin-bottom: 15px;
-`;
+`
 
 const Label = styled.label`
   display: block;
   margin-bottom: 5px;
-`;
+`
 
 const Input = styled.input`
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-`;
+`
 
 const SubmitButton = styled.button`
   padding: 10px 20px;
@@ -31,7 +31,7 @@ const SubmitButton = styled.button`
   &:hover {
     background-color: #e5989b; 
   }
-`;
+`
 
 export const Signup = () => {
   const dispatch = useDispatch()

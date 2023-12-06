@@ -18,7 +18,6 @@ export const Home = () => {
 
     return (
         <div className='pageContainer'>
-            <Header />
             <ItemListing />
         </div>
     )

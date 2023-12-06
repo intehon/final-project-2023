@@ -1,4 +1,4 @@
-import { NavLink, Link, Navigate, useNavigate } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from '@emotion/styled'
 import { signOut } from '../reducers/userSlice';
@@ -10,21 +10,21 @@ const Navbar = styled.nav`
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
   margin-bottom: 10px;
-`;
+`
 
 const NavButton = styled.button`
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #b5838d; /* Default button color */
+  background-color: #b5838d;
   color: #fff;
   margin-right: 10px; 
 
   &:hover {
     background-color: #e5989b; 
   }
-`;
+`
 
 export const NavBar = () => {
   const authenticated = useSelector(state => state.user.authenticated)

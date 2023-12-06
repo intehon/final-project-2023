@@ -4,22 +4,25 @@ import { setAuthenticated, setEmail, setPassword, setError } from '../reducers/u
 import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 
+const FormContainer = styled.div`
+  width: 400px;
+`
 
 const FormGroup = styled.div`
   margin-bottom: 15px;
-`;
+`
 
 const Label = styled.label`
   display: block;
   margin-bottom: 5px;
-`;
+`
 
 const Input = styled.input`
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-`;
+`
 
 const SubmitButton = styled.button`
   padding: 10px 20px;
@@ -32,7 +35,7 @@ const SubmitButton = styled.button`
   &:hover {
     background-color: #e5989b; 
   }
-`;
+`
 
 export const Login = () => {
   const [email, setEmailValue] = useState('')
@@ -40,7 +43,6 @@ export const Login = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // const userId = useSelector(state => state.user.userId) // Retrieve userId from Redux state
 
   const handleLogin = (event) => {
     event.preventDefault()
@@ -69,28 +71,30 @@ export const Login = () => {
   }
 
   return (
-    <div className='pageContainer'>
-      <form onSubmit={handleLogin}>
-        <FormGroup>
-          <Label htmlFor="email">Email:</Label>
-          <Input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmailValue(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="password">Password:</Label>
-          <Input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPasswordValue(e.target.value)}
-          />
-        </FormGroup>
-        <SubmitButton type="submit">Login</SubmitButton>
-      </form>
-    </div>
+      <div className='pageContainer'>
+        <FormContainer>
+          <form onSubmit={handleLogin}>
+            <FormGroup>
+              <Label htmlFor="email">Email:</Label>
+              <Input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmailValue(e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="password">Password:</Label>
+              <Input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPasswordValue(e.target.value)}
+              />
+            </FormGroup>
+            <SubmitButton type="submit">Login</SubmitButton>
+          </form>
+        </FormContainer>
+      </div>
   )
 }

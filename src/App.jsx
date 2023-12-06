@@ -9,6 +9,7 @@ import { WelcomePage } from './pages/WelcomePage'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { AddItem } from './components/AddItem'
+import { Header } from './components/Header'
 
 const store = configureStore({
   reducer: {
@@ -39,14 +40,15 @@ export const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Routes>
-          {/* Define your routes and components here */}
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/addItem" element={<AddItem />} />
-          {/* Add other routes as needed */}
-        </Routes>
+        <Header />
+          <Routes>
+            {/* Define your routes and components here */}
+            <Route path="/" element={<WelcomePage />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/addItem" element={<AddItem />} />
+            {/* Add other routes as needed */}
+          </Routes>
       </BrowserRouter>
     </Provider>
     )

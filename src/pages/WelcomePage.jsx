@@ -1,34 +1,31 @@
 import { Signup } from './Signup'
-import { Header } from '../components/Header'
 import styled from '@emotion/styled'
 
 const PageContainer = styled.div`
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  /* border: 1px solid #ccc; */
   border-radius: 8px;
-`;
+`
 
 const WelcomeHeader = styled.h1`
   font-size: 28px;
   margin-bottom: 10px;
-`;
+`
 
 const WelcomeParagraph = styled.p`
   margin-bottom: 15px;
-`;
+`
 
 const WelcomeSubHeader = styled.h2`
   margin-top: 20px;
   margin-bottom: 10px;
-`;
+`
 
 
 export const WelcomePage = () => {
   return (
     <PageContainer>
-      <Header />
       <div>
         <WelcomeHeader>Welcome to Swapify</WelcomeHeader>
         <WelcomeParagraph>

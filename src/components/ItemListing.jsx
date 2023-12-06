@@ -2,50 +2,44 @@ import { useDispatch, useSelector } from 'react-redux'
 import { claimItem, deleteItem } from '../reducers/itemSlice'
 import styled from '@emotion/styled'
 
-// const ContentContainer = styled.div`
-// max-width: 800px;
-// margin: 0 auto;
-// padding: 20px;
-// `;
-
 const ItemContainer = styled.div`
 display: flex;
 align-items: flex-start;
 margin-bottom: 20px;
-`;
+`
 
 const ItemDetails = styled.div`
 margin-left: 20px;
-`;
+`
 
 const Title = styled.p`
 font-weight: bold;
 margin-bottom: 5px;
-`;
+`
 
 const Description = styled.p`
 margin-bottom: 5px;
-`;
+`
 
 const Image = styled.img`
 max-width: 300px;
 max-height: 400px;
-`;
+`
 
 const Tags = styled.p`
 font-style: italic;
 margin-bottom: 5px;
-`;
+`
 
 const ButtonContainer = styled.div`
   display: flex;
   gap: 10px; 
   padding-top: 10px; 
-`;
+`
 
 const Button = styled.button`
   padding: 5px;
-`;
+`
 
 
 export const ItemListing = () => {
