@@ -17,7 +17,7 @@ export const Home = () => {
       }, [email, navigate])
 
     return (
-        <div>
+        <div className='pageContainer'>
             <Header />
             <ItemListing />
         </div>

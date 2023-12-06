@@ -19,12 +19,13 @@ const itemSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
-      const { title, description, imageUrl } = action.payload
+      const { title, description, imageUrl, tags } = action.payload
       const newItem = {
         id: uuidv4(),
         title,
         description,
         imageUrl,
+        tags,
         isClaimed: false,
         createdAt: new Date().toISOString(),
       }

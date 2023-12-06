@@ -1,27 +1,61 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link, Navigate, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import styled from '@emotion/styled'
+import { signOut } from '../reducers/userSlice';
 
-export const Navbar = () => {
-    const style = {
-        active: { color: "#808080", textDecoration: "none" },
-        notActive: { color: "#E40086", textDecoration: "underline" },
-      }
+const Navbar = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+`;
+
+const NavButton = styled.button`
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #b5838d; /* Default button color */
+  color: #fff;
+  margin-right: 10px; 
+
+  &:hover {
+    background-color: #e5989b; 
+  }
+`;
+
+export const NavBar = () => {
+  const authenticated = useSelector(state => state.user.authenticated)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleSignOut = () => {
+    dispatch(signOut())
+    // Clear user data from localStorage
+    localStorage.removeItem('userData')
+    //Redirect to welcome page ('/') after signed out
+    navigate('/')
+  }
+
   return (
-  <Container>
-        <NavLink exact to="/" style={({ isActive }) => (isActive ? style.notActive : style.active)}>Home</NavLink><Text> | </Text>
-        <NavLink exact to="/login" style={({ isActive }) => (isActive ? style.notActive : style.active)}>Login</NavLink><Text> | </Text>
-        <NavLink exact to="/signup" style={({ isActive }) => (isActive ? style.notActive : style.active)}>Sign Up</NavLink><Text> | </Text>
-  </Container>
+    <Navbar>
+      <div>{/* Your site logo or title can be placed here */}</div>
+      <div>
+        {authenticated ? (
+          <NavButton onClick={handleSignOut}>Sign Out</NavButton>
+        ) : (
+          <Link to="/login">
+            <NavButton>Login</NavButton>
+          </Link>
+        )}
+        {authenticated && (
+          <NavLink to="/addItem">
+            <NavButton activeClassName="active">Add Item</NavButton>
+          </NavLink>
+        )}
+      </div>
+    </Navbar>
   )
 }
-
-const Container = styled.nav`
-    display: inline;
-    justify-content: flex-end;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 25px 25px 5px;
-`
-
-const Text = styled.p`
-        display: inline;
-`

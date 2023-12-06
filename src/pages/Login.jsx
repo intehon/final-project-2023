@@ -2,6 +2,37 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setAuthenticated, setEmail, setPassword, setError } from '../reducers/userSlice'
 import { useNavigate } from 'react-router-dom'
+import styled from '@emotion/styled'
+
+
+const FormGroup = styled.div`
+  margin-bottom: 15px;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 5px;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+const SubmitButton = styled.button`
+  padding: 10px 20px;
+  background-color: #b5838d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e5989b; 
+  }
+`;
 
 export const Login = () => {
   const [email, setEmailValue] = useState('')
@@ -38,25 +69,27 @@ export const Login = () => {
   }
 
   return (
-    <div>
+    <div className='pageContainer'>
       <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
-          <input
+        <FormGroup>
+          <Label htmlFor="email">Email:</Label>
+          <Input
             type="email"
+            id="email"
             value={email}
             onChange={(e) => setEmailValue(e.target.value)}
           />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="password">Password:</Label>
+          <Input
             type="password"
+            id="password"
             value={password}
             onChange={(e) => setPasswordValue(e.target.value)}
           />
-        </div>
-        <button type="submit">Login</button>
+        </FormGroup>
+        <SubmitButton type="submit">Login</SubmitButton>
       </form>
     </div>
   )
