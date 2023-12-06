@@ -2,69 +2,89 @@ import { useDispatch, useSelector } from 'react-redux'
 import { claimItem, deleteItem } from '../reducers/itemSlice'
 import styled from '@emotion/styled'
 
+const PageContainer = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  /* padding: 20px; */
+`
+
 const ItemContainer = styled.div`
-display: flex;
-align-items: flex-start;
-margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
 `
 
 const ItemDetails = styled.div`
-margin-left: 20px;
+  /* margin-left: 20px; */
 `
 
 const Title = styled.p`
-font-weight: bold;
-margin-bottom: 5px;
+  font-weight: bold;
+  margin-bottom: 5px;
 `
 
 const Description = styled.p`
-margin-bottom: 5px;
+  margin-bottom: 5px;
 `
 
 const Image = styled.img`
-max-width: 300px;
-max-height: 400px;
+  width: 300px;
+  height: 300px;
+  margin-bottom: 10px;
 `
 
 const Tags = styled.p`
-font-style: italic;
-margin-bottom: 5px;
+  font-style: italic;
+  margin-bottom: 5px;
 `
 
 const ButtonContainer = styled.div`
   display: flex;
-  gap: 10px; 
-  padding-top: 10px; 
+  gap: 10px;
+  padding-top: 10px;
 `
 
 const Button = styled.button`
-  padding: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #b5838d;
+  color: #fff;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e5989b;
+  }
 `
 
-
 export const ItemListing = () => {
-    const dispatch = useDispatch()
-    const items = useSelector((state) => state.items.items)
-  
-    const handleClaimItem = (itemId) => {
-      dispatch(claimItem(itemId))
-    }
-  
-    const handleDeleteItem = (itemId) => {
-      dispatch(deleteItem(itemId))
-    }
+  const dispatch = useDispatch()
+  const items = useSelector((state) => state.items.items)
 
-    const reversedItems = [...items].reverse()
-    const totalItems = items.length
-    const unclaimedItems = items.filter((item) => !item.isClaimed).length
-  
-    return (
-      <div className='contentContainer'>
-        <div>
-          <p>Total items: {totalItems}</p>
-          <p>Still to catch: {unclaimedItems}</p>
-        </div>
-        <h2>Item Listing</h2>
+  const handleClaimItem = (itemId) => {
+    dispatch(claimItem(itemId))
+  }
+
+  const handleDeleteItem = (itemId) => {
+    dispatch(deleteItem(itemId))
+  }
+
+  const reversedItems = [...items].reverse()
+  const totalItems = items.length
+  const unclaimedItems = items.filter((item) => !item.isClaimed).length
+
+  return (
+    <>
+    <h2>Items available</h2>
+    <div>
+      <p>Total items: {totalItems}</p>
+      <p>Still to catch: {unclaimedItems}</p>
+    </div>
+      <PageContainer>
         {items.length === 0 ? (
           <p>No items available</p>
         ) : (
@@ -80,7 +100,7 @@ export const ItemListing = () => {
                     {!item.isClaimed ? (
                       <Button onClick={() => handleClaimItem(item.id)}>Claim Item</Button>
                     ) : (
-                      <p>Item claimed</p>
+                      <p>Item claimed!</p>
                     )}
                     <Button onClick={() => handleDeleteItem(item.id)}>Delete Item</Button>
                   </ButtonContainer>
@@ -89,6 +109,7 @@ export const ItemListing = () => {
             ))}
           </div>
         )}
-      </div>
-    )
-  }
+      </PageContainer>
+    </>
+  )
+}

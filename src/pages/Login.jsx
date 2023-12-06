@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 
 const FormContainer = styled.div`
-  width: 400px;
+  width: 300px;
 `
 
 const FormGroup = styled.div`

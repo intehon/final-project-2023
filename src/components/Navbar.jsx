@@ -1,4 +1,4 @@
-import { NavLink, Link, useNavigate } from 'react-router-dom'
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from '@emotion/styled'
 import { signOut } from '../reducers/userSlice';
@@ -9,7 +9,7 @@ const Navbar = styled.nav`
   align-items: center;
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 `
 
 const NavButton = styled.button`
@@ -30,6 +30,7 @@ export const NavBar = () => {
   const authenticated = useSelector(state => state.user.authenticated)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const handleSignOut = () => {
     dispatch(signOut())
@@ -39,16 +40,25 @@ export const NavBar = () => {
     navigate('/')
   }
 
+  const isLoginPage = location.pathname === '/login'
+  const buttonText = isLoginPage ? 'Back' : 'Login'
+
+  const handleLoginOrBack = () => {
+    if (isLoginPage) {
+      navigate('/')
+    } else {
+      navigate('/login')
+    }
+  }
+
   return (
     <Navbar>
       <div>{/* Your site logo or title can be placed here */}</div>
       <div>
-        {authenticated ? (
+      {authenticated ? (
           <NavButton onClick={handleSignOut}>Sign Out</NavButton>
         ) : (
-          <Link to="/login">
-            <NavButton>Login</NavButton>
-          </Link>
+          <NavButton onClick={handleLoginOrBack}>{buttonText}</NavButton>
         )}
         {authenticated && (
           <NavLink to="/addItem">
