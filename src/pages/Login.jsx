@@ -4,39 +4,6 @@ import { setAuthenticated, setEmail, setPassword, setError } from '../reducers/u
 import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 
-const FormContainer = styled.div`
-  width: 300px;
-`
-
-const FormGroup = styled.div`
-  margin-bottom: 15px;
-`
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 5px;
-`
-
-const Input = styled.input`
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`
-
-const SubmitButton = styled.button`
-  padding: 10px 20px;
-  background-color: #b5838d;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #e5989b; 
-  }
-`
-
 export const Login = () => {
   const [email, setEmailValue] = useState('')
   const [password, setPasswordValue] = useState('')
@@ -98,3 +65,36 @@ export const Login = () => {
       </div>
   )
 }
+
+const FormContainer = styled.div`
+  width: 300px;
+`
+
+const FormGroup = styled.div`
+  margin-bottom: 15px;
+`
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 5px;
+`
+
+const Input = styled.input`
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`
+
+const SubmitButton = styled.button`
+  padding: 10px 20px;
+  background-color: #e5989b;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ffb4a2; 
+  }
+`

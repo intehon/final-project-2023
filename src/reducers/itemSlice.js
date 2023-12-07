@@ -47,9 +47,9 @@ const itemSlice = createSlice({
         state.items = state.items.filter((task) => task.id !== action.payload)
         saveItems(state.items) //Save to localStorage
       },
-      setItems: (state, action) => {
+    setItems: (state, action) => {
         state.items = action.payload
-      }
+      },
   },
 })
 
