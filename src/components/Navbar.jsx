@@ -51,10 +51,10 @@ export const NavBar = () => {
 
   return (
     <Navbar>
-      <div>
+      <TextWrapper>
         <NavBarText>{unclaimedItems} out of {totalItems} items are still up for grabs!
         Go get it! 🫳🏽 *grab grab* 🦀</NavBarText>
-      </div>
+      </TextWrapper>
       <NavButtonWrapper>
         {authenticated ? (
           <>
@@ -126,5 +126,15 @@ const NavButtonWrapper = styled.div`
   @media (min-width: 768px) {
     flex-direction: row; 
     margin-top: 0; 
+  }
+`
+
+const TextWrapper = styled.div`
+  width: 60%;
+  padding: 10px;
+
+  @media (min-width: 768px) {
+    width: 100%;
+    padding: 0;
   }
 `
