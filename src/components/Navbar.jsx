@@ -48,13 +48,23 @@ export const NavBar = () => {
   
   const isAddItemPage = location.pathname === '/addItem'  
 
+  const showNoItemsText = totalItems === 0
 
   return (
     <Navbar>
-      <TextWrapper>
-        <NavBarText>{unclaimedItems} out of {totalItems} items are still up for grabs!
-        Go get it! 🫳🏽 *grab grab* 🦀</NavBarText>
-      </TextWrapper>
+ {showNoItemsText ? (
+        <TextWrapper>
+          <NavBarText>
+            Unlock the magic of sharing. Turn your cherished belongings into someone else's treasure. 🧙🏽
+          </NavBarText>
+        </TextWrapper>
+      ) : (
+        <TextWrapper>
+          <NavBarText>
+            {unclaimedItems} out of {totalItems} items are still up for grabs! Go get it! 🫳🏽 *grab grab* 🦀
+          </NavBarText>
+        </TextWrapper>
+      )}
       <NavButtonWrapper>
         {authenticated ? (
           <>
@@ -114,6 +124,7 @@ const NavButton = styled.button`
 `
 const NavBarText = styled.p`
   font-size: 12px;
+  color: rgb(162, 162, 162);
 `
 
 const NavButtonWrapper = styled.div`
