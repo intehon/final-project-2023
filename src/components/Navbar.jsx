@@ -61,7 +61,7 @@ export const NavBar = () => {
       ) : (
         <TextWrapper>
           <NavBarText>
-            {unclaimedItems} out of {totalItems} items are still up for grabs! Go get it! 🫳🏽 *grab grab* 🦀
+            {unclaimedItems} out of {totalItems} items are still up for grabs! Go get it! *grab grab* 🦀
           </NavBarText>
         </TextWrapper>
       )}
