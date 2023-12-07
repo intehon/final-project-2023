@@ -85,6 +85,7 @@ export const Signup = () => {
     </>
   )
 }
+
 const FormGroup = styled.div`
   margin-bottom: 15px;
 `

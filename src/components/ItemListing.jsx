@@ -1,24 +1,24 @@
 import { Loading } from './Loading'
 import { useDispatch, useSelector } from 'react-redux'
-import { claimItem, deleteItem } from '../reducers/itemSlice'
+import { claimItem, deleteItem, setItems } from '../reducers/itemSlice'
 import styled from '@emotion/styled'
 import { useState, useEffect } from 'react'
 import moment from 'moment/moment'
-import { setItems } from '../reducers/itemSlice'
 import { FiShoppingCart } from "react-icons/fi"
 import { FiHeart } from "react-icons/fi"
 import { RiDeleteBinLine } from "react-icons/ri"
+import clam from '../assets/clam.avif'
 
 export const ItemListing = () => {
   const dispatch = useDispatch()
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const items = useSelector((state) => state.items.items)
   const userId = useSelector((state) => state.user.userId)
 
   useEffect(() => {
     const delay = setTimeout(() => {
       setLoading(false)
-    }, 2000)
+    }, 200)
 
     return () => clearTimeout(delay)
   }, [])
@@ -51,10 +51,13 @@ export const ItemListing = () => {
     <>
       {/* <h2>Treasures Up for Grabs!</h2> */}
       <PageContainer>
-      {loading ? (
+        {loading ? (
           <Loading />
         ) : items.length === 0 ? (
-          <p>No items available</p>
+          <NoItemsMessage>
+            <img src={clam} alt="No treasures" />
+            Looks like this treasure chest is waiting to be filled! Why not start the adventure?
+          </NoItemsMessage>
         ) : (
           <div>
             {reversedItems.map((item) => (
@@ -105,7 +108,6 @@ const PageContainer = styled.div`
 const ItemContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
   margin-bottom: 20px;
   border: 1px solid #ccc;
   padding: 10px;
@@ -179,10 +181,26 @@ const ActionButton = styled.button`
   }
 
   &:hover {
-    transform: scale(1.1); /* Scale the button on hover */
+    transform: scale(1.1); 
   }
 
   &:hover {
     background-color: ${({ isClicked }) => (isClicked ? '#e5989b' : '#e5989b')}; 
+  }
+`
+
+const NoItemsMessage = styled.div`
+  position: relative;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+  font-style: italic;
+  color: rgb(162, 162, 162);
+
+  img {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
   }
 `

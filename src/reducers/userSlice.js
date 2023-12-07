@@ -12,6 +12,7 @@ const initialState = {
   authenticated: !!storedUser, // Set authenticated based on stored user data
   email: storedUser ? storedUser.email : null,
   password: storedUser ? storedUser.password : null,
+  username: storedUser ? storedUser.username : null,
   error: null,
 }
 
@@ -25,6 +26,9 @@ const userSlice = createSlice({
     setPassword: (state, action) => {
       state.password = action.payload
     },
+    setUsername: (state, action) => {
+      state.username = action.payload
+    },
     setError: (state, action) => {
       state.error = action.payload
     },
@@ -35,6 +39,7 @@ const userSlice = createSlice({
       state.authenticated = false
       state.email = null
       state.password = null
+      state.username = null
       state.error = null
     },
     setAuthenticated: (state, action) => {
@@ -52,6 +57,14 @@ const userSlice = createSlice({
   },
 })
 
-export const { setAuthenticated, setEmail, setPassword, setError, setInitialState, signOut } = userSlice.actions
+export const { 
+  setAuthenticated, 
+  setEmail, 
+  setPassword, 
+  setUsername,
+  setError, 
+  setInitialState, 
+  signOut,
+} = userSlice.actions
 
 export default userSlice.reducer
