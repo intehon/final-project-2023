@@ -25,7 +25,7 @@ const WelcomeSubHeader = styled.h2`
 
 export const WelcomePage = () => {
   return (
-    <PageContainer>
+    <div className='pageContainer'>
       <div>
         <WelcomeHeader>Welcome to Swapify</WelcomeHeader>
         <WelcomeParagraph>
@@ -39,6 +39,6 @@ export const WelcomePage = () => {
           <Signup />
         </div>
       </div>
-    </PageContainer>
+    </div>
   )
 }
