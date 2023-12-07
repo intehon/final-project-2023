@@ -133,7 +133,6 @@ export const AddItem = () => {
 
   return (
     <>
-      <NavBar />
       <FormContainer>
         <h2>Add Item</h2>
         <TitleInput
