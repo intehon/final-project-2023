@@ -5,7 +5,6 @@ import styled from '@emotion/styled'
 import { useState, useEffect } from 'react'
 import moment from 'moment/moment'
 import { setItems } from '../reducers/itemSlice'
-// import { FiShoppingCart, FiHeart, RiDeleteBinLine } from "react-icons/all"
 import { FiShoppingCart } from "react-icons/fi"
 import { FiHeart } from "react-icons/fi"
 import { RiDeleteBinLine } from "react-icons/ri"
@@ -50,7 +49,7 @@ export const ItemListing = () => {
 
   return (
     <>
-      <h2>Items available</h2>
+      {/* <h2>Treasures Up for Grabs!</h2> */}
       <PageContainer>
       {loading ? (
           <Loading />

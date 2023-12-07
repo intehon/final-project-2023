@@ -1,7 +1,11 @@
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from '@emotion/styled'
-import { signOut } from '../reducers/userSlice';
+import { signOut } from '../reducers/userSlice'
+import { FaPlus} from "react-icons/fa6"
+import { FaHome } from "react-icons/fa"
+import { CgProfile } from "react-icons/cg"
+import { FiLogOut } from "react-icons/fi"
 
 export const NavBar = () => {
   const authenticated = useSelector(state => state.user.authenticated)
@@ -32,25 +36,50 @@ export const NavBar = () => {
   const totalItems = items.length
   const unclaimedItems = items.filter((item) => !item.isClaimed).length
 
+  const isHomePage = location.pathname === '/home'
+
+  const handleGoHome = () => {
+    if (!isHomePage) {
+      navigate('/home')
+    } else {
+      navigate('/')
+    }
+  }
+  
+  const isAddItemPage = location.pathname === '/addItem'  
+
 
   return (
     <Navbar>
       <div>
-      <NavBarText>{unclaimedItems} out of {totalItems} items are still up for grabs! Go get it!</NavBarText>
-      <NavBarText>🫳🏽 *crab grab* 🦀</NavBarText>
+        <NavBarText>{unclaimedItems} out of {totalItems} items are still up for grabs! Go get it!</NavBarText>
+        <NavBarText>🫳🏽 *crab grab* 🦀</NavBarText>
       </div>
-      <div>
       {authenticated ? (
-          <NavButton onClick={handleSignOut}>Sign Out</NavButton>
+        <>
+          <NavLink to="/userpage">
+            <NavButton activeClassName="active">
+              <CgProfile />
+            </NavButton>
+          </NavLink>
+          {isAddItemPage ? (
+          <NavButton activeClassName="active" onClick={handleGoHome}>
+            <FaHome />
+          </NavButton>
         ) : (
-          <NavButton onClick={handleLoginOrBack}>{buttonText}</NavButton>
-        )}
-        {authenticated && (
           <NavLink to="/addItem">
-            <NavButton activeClassName="active">Add Item</NavButton>
+            <NavButton activeClassName="active">
+              <FaPlus />
+            </NavButton>
           </NavLink>
         )}
-      </div>
+          <NavButton onClick={handleSignOut}>
+            <FiLogOut />
+          </NavButton>
+        </>
+      ) : (
+        <NavButton onClick={handleLoginOrBack}>{buttonText}</NavButton>
+      )}
     </Navbar>
   )
 }
@@ -61,7 +90,6 @@ const Navbar = styled.nav`
   align-items: center;
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
-  /* margin-bottom: 10px; */
 `
 
 const NavButton = styled.button`
@@ -71,7 +99,6 @@ const NavButton = styled.button`
   cursor: pointer;
   background-color: #e5989b;
   color: #fff;
-  margin-right: 10px; 
 
   &:hover {
     background-color: #ffb4a2; 
