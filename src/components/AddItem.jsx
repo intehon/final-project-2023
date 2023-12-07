@@ -11,7 +11,6 @@ export const AddItem = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [image, setImage] = useState(null)
-  const [tags, setTags] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
@@ -26,11 +25,6 @@ export const AddItem = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0]
     setImage(file)
-  }
-
-  const handleTagsChange = (e) => {
-    const tagsArray = e.target.value.split(',')
-    setTags(tagsArray)
   }
 
   const handleAddItem = async () => {
@@ -63,13 +57,12 @@ export const AddItem = () => {
       }
 
       // Dispatch action to add item with image URL
-      dispatch(addItem({ title, description, imageUrl, tags }))
+      dispatch(addItem({ title, description, imageUrl }))
 
       // Clear input fields after adding item
       setTitle('')
       setDescription('')
       setImage(null)
-      setTags([])
       setError(null)
       //Redirect to Home component after successful post
       navigate('/home')
@@ -87,27 +80,20 @@ export const AddItem = () => {
         <h2>Add Item</h2>
         <TitleInput
           type="text"
-          input id='title'
+          id='title'
           placeholder="Title"
           value={title}
           onChange={handleTitleChange}
         />
         <DescriptionTextarea
           placeholder="Description"
-          input id='description'
+          id='description'
           value={description}
           onChange={handleDescriptionChange}
         />
-        <TagsInput
-          type="text"
-          placeholder="Tags (comma-separated)"
-          input id='tags'
-          value={tags}
-          onChange={handleTagsChange}
-        />
         <FileInput
           type="file"
-          input id='image'
+          id='image'
           accept="image/*"
           onChange={handleImageChange}
         />
@@ -118,39 +104,36 @@ export const AddItem = () => {
     </>
   )
 }
-
 const FormContainer = styled.div`
-  max-width: 400px;
+  max-width: 300px;
   margin: 0 auto;
+  margin-top: 20px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding-right: 35px;
-  margin-top: 20px;
+  box-sizing: border-box;
+
+  @media (min-width: 768px) {
+    max-width: 500px; 
+  }
 `
 
 const TitleInput = styled.input`
   width: 100%;
   margin-bottom: 10px;
-  padding: 8px;
+  padding: 12px; /* Adjust padding for better touch interaction */
   border: 1px solid #ccc;
   border-radius: 4px;
+  box-sizing: border-box;
 `
 
 const DescriptionTextarea = styled.textarea`
   width: 100%;
   margin-bottom: 10px;
-  padding: 8px;
+  padding: 12px; /* Adjust padding for better touch interaction */
   border: 1px solid #ccc;
   border-radius: 4px;
-`
-
-const TagsInput = styled.input`
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  box-sizing: border-box;
 `
 
 const FileInput = styled.input`
@@ -158,15 +141,15 @@ const FileInput = styled.input`
 `
 
 const AddButton = styled.button`
-  padding: 8px 16px;
-  background-color: #b5838d;
+  padding: 12px 24px; /* Increase touch area and padding for mobile */
+  background-color: #e5989b;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 
   &:hover {
-    background-color: #e5989b; 
+    background-color: #ffb4a2; 
   }
 `
 

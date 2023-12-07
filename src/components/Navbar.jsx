@@ -52,44 +52,52 @@ export const NavBar = () => {
   return (
     <Navbar>
       <div>
-        <NavBarText>{unclaimedItems} out of {totalItems} items are still up for grabs! Go get it!</NavBarText>
-        <NavBarText>🫳🏽 *crab grab* 🦀</NavBarText>
+        <NavBarText>{unclaimedItems} out of {totalItems} items are still up for grabs!
+        Go get it! 🫳🏽 *grab grab* 🦀</NavBarText>
       </div>
-      {authenticated ? (
-        <>
-          <NavLink to="/userpage">
-            <NavButton activeClassName="active">
-              <CgProfile />
+      <NavButtonWrapper>
+        {authenticated ? (
+          <>
+            <NavLink to="/userpage">
+              <NavButton activeClassName="active">
+                <CgProfile />
+              </NavButton>
+            </NavLink>
+            {isAddItemPage ? (
+            <NavButton activeClassName="active" onClick={handleGoHome}>
+              <FaHome />
             </NavButton>
-          </NavLink>
-          {isAddItemPage ? (
-          <NavButton activeClassName="active" onClick={handleGoHome}>
-            <FaHome />
-          </NavButton>
+          ) : (
+            <NavLink to="/addItem">
+              <NavButton activeClassName="active">
+                <FaPlus />
+              </NavButton>
+            </NavLink>
+          )}
+            <NavButton onClick={handleSignOut}>
+              <FiLogOut />
+            </NavButton>
+          </>
         ) : (
-          <NavLink to="/addItem">
-            <NavButton activeClassName="active">
-              <FaPlus />
-            </NavButton>
-          </NavLink>
+          <NavButton onClick={handleLoginOrBack}>{buttonText}</NavButton>
         )}
-          <NavButton onClick={handleSignOut}>
-            <FiLogOut />
-          </NavButton>
-        </>
-      ) : (
-        <NavButton onClick={handleLoginOrBack}>{buttonText}</NavButton>
-      )}
+      </NavButtonWrapper>
     </Navbar>
   )
 }
 
 const Navbar = styled.nav`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 `
 
 const NavButton = styled.button`
@@ -106,4 +114,17 @@ const NavButton = styled.button`
 `
 const NavBarText = styled.p`
   font-size: 12px;
+`
+
+const NavButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-evenly; 
+  width: 100%; 
+  margin-top: 8px; 
+
+  @media (min-width: 768px) {
+    flex-direction: row; 
+    margin-top: 0; 
+  }
 `

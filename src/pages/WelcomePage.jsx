@@ -11,7 +11,6 @@ export const WelcomePage = () => {
   if (isAuthenticated) {
     navigate('/home')
   }
-
   return (
     <div className='pageContainer'>
       <div>
@@ -44,4 +43,3 @@ const WelcomeSubHeader = styled.h2`
   margin-top: 20px;
   margin-bottom: 10px;
 `
-

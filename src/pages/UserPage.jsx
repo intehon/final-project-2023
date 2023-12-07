@@ -18,7 +18,7 @@ export const UserPage = () => {
     setNewUsername(user.username || '')
   }, [user])
 
-  
+
   const handleEmailChange = (e) => {
     setNewEmail(e.target.value)
   }
@@ -49,7 +49,7 @@ export const UserPage = () => {
     setNewEmail('')
     setNewUsername('')
     setNewPassword('')
-  };
+  }
 
   return (
     <PageContainer>
@@ -63,26 +63,46 @@ export const UserPage = () => {
       <UserForm onSubmit={handleFormSubmit}>
         <h2>Update Profile</h2>
         <StyledForm>
-          <FormLabel>New Username:</FormLabel>
-          <FormInput type="text" value={newUsername} onChange={handleUsernameChange} />
-          <FormLabel>New Email:</FormLabel>
-          <FormInput type="email" value={newEmail} onChange={handleEmailChange} />
-          <FormLabel>New Password:</FormLabel>
-          <FormInput type="password" value={newPassword} onChange={handlePasswordChange} />
+          <FormLabel htmlFor="newUsername">New Username:</FormLabel>
+          <FormInput
+            type="text"
+            id="newUsername"
+            value={newUsername}
+            onChange={handleUsernameChange}
+          />
+          <FormLabel htmlFor="newEmail">New Email:</FormLabel>
+          <FormInput
+            type="email"
+            id="newEmail"
+            value={newEmail}
+            onChange={handleEmailChange}
+          />
+          <FormLabel htmlFor="newPassword">New Password:</FormLabel>
+          <FormInput
+            type="password"
+            id="newPassword"
+            value={newPassword}
+            onChange={handlePasswordChange}
+          />
           <SubmitButton type="submit">Update</SubmitButton>
         </StyledForm>
       </UserForm>
     </PageContainer>
   )
 }
-
 const PageContainer = styled.div`
-  max-width: 800px;
+  max-width: 300px;
   margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+
+  @media (min-width: 768px) {
+    max-width: 500px; 
+  }
 `
 
 const UserInfo = styled.div`
-  padding: 20px;
+  padding: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -90,12 +110,12 @@ const UserInfo = styled.div`
 
 const UserInfoDetails = styled.div`
   p {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 `
 
 const UserForm = styled.form`
-  padding: 20px;
+  padding: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
 `
@@ -106,12 +126,15 @@ const StyledForm = styled.div`
 `
 
 const FormLabel = styled.label`
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 `
 
 const FormInput = styled.input`
-  padding: 8px;
+  padding: 10px;
   margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 `
 
 const SubmitButton = styled.button`

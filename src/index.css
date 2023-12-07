@@ -86,107 +86,48 @@ video {
   vertical-align: baseline;
 }
 
+/* Define color variables */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  --main-color: #b5838d; 
+  --secondary-color: #ffb4a2; 
+  --text-color: #333; 
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  justify-content: center;
-  align-items: center;
+  font-family: Arial, sans-serif;
+  color: var(--text-color);
 }
 
 /* Mobile-first styles */
 .pageContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  max-width: 400px;
-  min-height: 50vh; 
-  margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
   border-radius: 8px;
+  background-color: white;
+  max-width: 100%;
+  margin: 0 auto; 
 }
 
 .contentContainer {
   text-align: center;
-  padding: 20px;
-  /* justify-content: center; */
-  /* align-items: center; */
 }
 
-.loadingOverlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: #ffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loadingSpinner {
-  height: 50px;
-  width: 50px;
-  border: 5px solid #dcdcdc;
-  border-radius: 50%;
-  border-left: 5px solid #ffff;
-  animation: spinner infinite 0.6s;
-  display: inline-block;
-}
-
-@keyframes spinner {
-  0% {
-    transform: rotate(0);
-  }
-  13% {
-    transform: rotate(45deg);
-  }
-  25% {
-    transform: rotate(90deg);
-  }
-  38% {
-    transform: rotate(135deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  63% {
-    transform: rotate(225deg);
-  }
-  75% {
-    transform: rotate(270deg);
-  }
-  88% {
-    transform: rotate(315deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 10px;
+  color: var(--main-color);
 }
 
 /* Media query for larger screens (e.g., desktop) */
 @media (min-width: 768px) {
   .pageContainer {
-    padding: 40px; 
+    padding: 30px; 
   }
+}
 
-
-  .contentContainer {
-    max-width: 800px; 
-    margin: 0 auto; 
+/* Media query for even larger screens (adjust max-width as needed) */
+@media (min-width: 1200px) {
+  .pageContainer {
+    max-width: 500px; /* Set maximum width for larger desktop screens */
   }
 }

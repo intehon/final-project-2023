@@ -8,6 +8,7 @@ import { FiShoppingCart } from "react-icons/fi"
 import { FiHeart } from "react-icons/fi"
 import { RiDeleteBinLine } from "react-icons/ri"
 import clam from '../assets/clam.avif'
+import treasure from '../assets/treasuechest.png'
 
 export const ItemListing = () => {
   const dispatch = useDispatch()
@@ -49,7 +50,6 @@ export const ItemListing = () => {
 
   return (
     <>
-      {/* <h2>Treasures Up for Grabs!</h2> */}
       <PageContainer>
         {loading ? (
           <Loading />
@@ -61,37 +61,44 @@ export const ItemListing = () => {
         ) : (
           <div>
             {reversedItems.map((item) => (
-              <ItemContainer key={item.id}>
-                {item.imageUrl && <Image src={item.imageUrl} alt={item.title} />}
-                <div>
-                <ActionContainer>
-                  <ActionButton onClick={() => handleClaimItem(item.id)} isClicked={item.isClaimed}>
-                    <FiShoppingCart />
-                  </ActionButton>
-                  <ActionButton onClick={() => handleDeleteItem(item.id)}>
-                    <RiDeleteBinLine />
-                  </ActionButton>
-                  <ActionButton
-                    isClicked={item.likes && item.likes.includes(userId)}
-                    onClick={() => handleLikeItem(item.id)}
-                    disabled={item.likes && item.likes.includes(userId)}
-                    isDisabled={item.likes && item.likes.includes(userId)}
-                  >
-                    <FiHeart />
-                  </ActionButton>
-                </ActionContainer>
-                  <Title>{item.title}</Title>
-                  <Description>{item.description}</Description>
-                  <Tags># {item.tags ? item.tags.join(', ') : 'No tags'}</Tags>
-                  <UserDetails>
-                    <p>{moment(item.createdAt).fromNow()}</p>
-                    <LikeContainer>
-                      <FiHeart style={{ marginRight: '5px' }} />
-                      <p>x {item.likes ? item.likes.length : 0}</p>
-                    </LikeContainer>
-                  </UserDetails>
-                </div>
-              </ItemContainer>
+             <ItemContainer key={item.id}>
+            {item.imageUrl ? (
+              <Image src={item.imageUrl} alt={item.title} />
+            ) : (
+              <DefaultImage src={treasure} alt="Default Image" />
+            )}
+             <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+               <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+               <ActionContainer>
+                 <ActionButton onClick={() => handleClaimItem(item.id)} isClicked={item.isClaimed}>
+                   <FiShoppingCart />
+                 </ActionButton>
+                 <ActionButton onClick={() => handleDeleteItem(item.id)}>
+                   <RiDeleteBinLine />
+                 </ActionButton>
+                 <ActionButton
+                   isClicked={item.likes && item.likes.includes(userId)}
+                   onClick={() => handleLikeItem(item.id)}
+                   disabled={item.likes && item.likes.includes(userId)}
+                   isDisabled={item.likes && item.likes.includes(userId)}
+                 >
+                   <FiHeart />
+                 </ActionButton>
+               </ActionContainer>
+                 <DescriptionContainer>
+                   <Title>{item.title}</Title>
+                   <Description>{item.description}</Description>
+                 </DescriptionContainer>
+                 <UserDetails>
+                   <p>{moment(item.createdAt).fromNow()}</p>
+                   <LikeContainer>
+                     <FiHeart style={{ marginRight: '5px' }} />
+                     <p>x {item.likes ? item.likes.length : 0}</p>
+                   </LikeContainer>
+                 </UserDetails>
+               </div>
+             </div>
+           </ItemContainer>
             ))}
           </div>
         )}
@@ -100,53 +107,68 @@ export const ItemListing = () => {
   )
 }
 
+
 const PageContainer = styled.div`
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 `
 
 const ItemContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
-  padding: 10px;
+  max-width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  padding: 20px;
+
+  @media (min-width: 768px) {
+    align-items: center;
+  }
 `
 
 const Title = styled.p`
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 `
 
 const Description = styled.p`
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 `
 
 const Image = styled.div`
-  width: 300px;
+  width: 100%;
   height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid white; 
-  box-sizing: border-box;
+  border: 2px solid white;
   overflow: hidden;
-  margin-bottom: 10px;
   background-image: ${({ src }) => (src ? `url(${src})` : 'none')};
-  background-size: cover;
+  background-size: cover; 
   background-position: center;
   background-repeat: no-repeat;
-`
 
-const Tags = styled.p`
-  font-style: italic;
-  margin-bottom: 5px;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    height: 250px; 
+  }
+
+  @media (min-width: 1025px) {
+    height: 400px; 
+  }
 `
 
 const ActionContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
-  padding: 10px;
+  padding: 8px;
+  width: 100%; 
+  
+  @media (min-width: 768px) {
+    width: 100%; /
+    padding: 10px; 
+  }
 `
 
 const LikeContainer = styled.div`
@@ -157,40 +179,41 @@ const LikeContainer = styled.div`
 const UserDetails = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-top: 5px;
-  align-items: flex-start;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  color: rgb(162, 162, 162)
+  padding: 5px 20px; 
+  align-items: center; 
+  font-size: 14px; 
+  color: rgb(162, 162, 162);
+  width: 100%; 
+  
+  @media (min-width: 768px) {
+    padding: 5px 10px; 
+    width: 100%; 
+  }
 `
 
 const ActionButton = styled.button`
-  width: 30px;
-  height: 30px;
-  border-radius: 100%;
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 8px;
   background-color: ${({ isClicked }) => (isClicked ? '#e5989b' : 'white')};
-  transition: transform 0.3s ease; 
+  transition: transform 0.3s ease, background-color 0.3s ease; 
 
   & > svg {
-    color: black; 
+    color: ${({ isClicked }) => (isClicked ? 'white' : 'black')}; 
   }
 
   &:hover {
-    transform: scale(1.1); 
-  }
-
-  &:hover {
-    background-color: ${({ isClicked }) => (isClicked ? '#e5989b' : '#e5989b')}; 
+    transform: scale(1.1);
+    background-color: ${({ isClicked }) => (isClicked ? '#e5989b' : '#f1f1f1')}; 
   }
 `
 
 const NoItemsMessage = styled.div`
-  position: relative;
   text-align: center;
   margin-top: 20px;
   font-size: 16px;
@@ -203,4 +226,20 @@ const NoItemsMessage = styled.div`
     display: block;
     margin: 0 auto 10px;
   }
+`
+
+const DescriptionContainer = styled.div`
+  padding: 20px;
+  width: 100%; 
+  
+  @media (min-width: 768px) {
+    width: 100%; 
+    padding: 10px; 
+  }
+`
+
+const DefaultImage = styled.img`
+  width: 100%;
+  height: 300px; 
+  object-fit: cover; 
 `
