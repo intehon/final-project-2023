@@ -28,6 +28,7 @@ const itemSlice = createSlice({
         tags,
         isClaimed: false,
         createdAt: new Date().toISOString(),
+        likes: [],
       }
       state.items = [...state.items, newItem]
       saveItems(state.items) //Save to localStorage
