@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setEmail, setPassword, setAuthenticated, setError } from '../reducers/userSlice'
+import { setEmail, setPassword, setUsername, setError } from '../reducers/userSlice'
 import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/react'
@@ -10,39 +10,48 @@ export const Signup = () => {
   const navigate = useNavigate()
   const [email, setEmailValue] = useState('')
   const [password, setPasswordValue] = useState('')
+  const [username, setUsernameValue] = useState('')
 
   const error = useSelector((state) => state.user.error)
 
   const handleSignup = (event) => {
     event.preventDefault()
-
-    //Check if email is already registered
+  
+    // Check if email is already registered
     const storedUserData = localStorage.getItem('userData')
-    const parsedStoredUserData = storedUserData ? JSON.parse(storedUserData) : null
-
+    const parsedStoredUserData = storedUserData ? JSON.parse(storedUserData)     : null
+  
     if (parsedStoredUserData && parsedStoredUserData.email === email) {
       dispatch(setError('Email is already registered. Please login instead.'))
       return
     }
-
-    //Continue with signup process if not already registered
+  
+    // Check if username already exists
+    if (parsedStoredUserData && parsedStoredUserData.username === username) {
+      dispatch(setError('Username already taken. Choose another one.'))
+      return
+    }
+  
+    // Continue with signup process if not already registered
     localStorage.setItem('email', email)
     localStorage.setItem('password', password)
-
+  
     dispatch(setEmail(email))
     dispatch(setPassword(password))
-
-    
+    dispatch(setUsername(username))
+  
     const user = {
       email,
+      username,
     }
-
-    //Store user data in localStorage
+  
+    // Store user data in localStorage
     localStorage.setItem('userData', JSON.stringify(user))
-
-    // Clear form fields after submission
+  
+    // Clear form fields after successful submission
     setEmailValue('')
     setPasswordValue('')
+    setUsernameValue('')
   }
 
     //Redirect to home page only when there is no error
@@ -51,6 +60,9 @@ export const Signup = () => {
         navigate('/')
       }
     }, [error, navigate])
+
+    console.log("username: ", username)
+    console.log("email: ", email)
 
   return (
     <>
@@ -65,6 +77,15 @@ export const Signup = () => {
         error={error}
       />
     </FormGroup>
+    <FormGroup>
+          <Label htmlFor="username">Username:</Label>
+          <Input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsernameValue(e.target.value)}
+          />
+        </FormGroup>
     <FormGroup>
       <Label htmlFor="password">Password:</Label>
       <InputWithError

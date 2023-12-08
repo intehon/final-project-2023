@@ -51,6 +51,8 @@ export const UserPage = () => {
     setNewPassword('')
   }
 
+  console.log('username: ', user.username)
+
   return (
     <PageContainer>
       <UserInfo>
@@ -90,6 +92,7 @@ export const UserPage = () => {
     </PageContainer>
   )
 }
+
 const PageContainer = styled.div`
   max-width: 300px;
   margin: 0 auto;

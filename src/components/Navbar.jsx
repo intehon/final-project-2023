@@ -61,7 +61,8 @@ export const NavBar = () => {
       ) : (
         <TextWrapper>
           <NavBarText>
-            {unclaimedItems} out of {totalItems} items are still up for grabs! Go get it! *grab grab* 🦀
+            {unclaimedItems} out of {totalItems} items are still up for grabs!</NavBarText>
+            <NavBarText>Go get it! *grab grab* 🦀
           </NavBarText>
         </TextWrapper>
       )}
@@ -130,12 +131,13 @@ const NavBarText = styled.p`
 const NavButtonWrapper = styled.div`
   display: flex;
   flex-direction: row; 
-  justify-content: space-evenly; 
+  justify-content: center; 
   width: 100%; 
   margin-top: 8px; 
+  gap: 10px;
 
   @media (min-width: 768px) {
-    flex-direction: row; 
+    justify-content: flex-end;
     margin-top: 0; 
   }
 `

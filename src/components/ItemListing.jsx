@@ -15,6 +15,7 @@ export const ItemListing = () => {
   const [loading, setLoading] = useState(true)
   const items = useSelector((state) => state.items.items)
   const userId = useSelector((state) => state.user.userId)
+  const user = useSelector((state) => state.user)
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -48,6 +49,10 @@ export const ItemListing = () => {
 
   const reversedItems = [...items].reverse()
 
+  console.log("username: ", user.username)
+  console.log("email: ", user.email)
+  console.log("userId: ", userId)
+
   return (
     <>
       <PageContainer>
@@ -55,8 +60,9 @@ export const ItemListing = () => {
           <Loading />
         ) : items.length === 0 ? (
           <NoItemsMessage>
-            <img src={clam} alt="No treasures" />
-            Looks like this treasure chest is waiting to be filled! Why not start the adventure?
+            <img src={treasure} alt="No treasures" />
+            <p>Looks like this treasure chest is waiting to be filled!</p>
+            <p>Why not start the adventure?</p>
           </NoItemsMessage>
         ) : (
           <div>
@@ -119,8 +125,9 @@ const ItemContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 5px;
   margin-bottom: 20px;
+  border-bottom: 1px solid #ADC2D3;
   max-width: 100%;
   box-sizing: border-box;
   background-color: white;
@@ -150,11 +157,11 @@ const Image = styled.div`
   background-position: center;
   background-repeat: no-repeat;
 
-  @media (min-width: 768px) and (max-width: 1024px) {
+  @media (min-width: 768px) and (max-width: 900px) {
     height: 250px; 
   }
 
-  @media (min-width: 1025px) {
+  @media (min-width: 901px) {
     height: 400px; 
   }
 `
@@ -174,20 +181,20 @@ const ActionContainer = styled.div`
 const LikeContainer = styled.div`
   display: flex;
   align-items: center;
+  padding: 10px;
 `
 
 const UserDetails = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 5px 20px; 
-  align-items: center; 
-  font-size: 14px; 
+  align-items: center;
+  padding: 5px;
+  font-size: 14px;
   color: rgb(162, 162, 162);
-  width: 100%; 
-  
+  width: 100%;
+
   @media (min-width: 768px) {
-    padding: 5px 10px; 
-    width: 100%; 
+    width: auto; 
   }
 `
 
@@ -229,7 +236,7 @@ const NoItemsMessage = styled.div`
 `
 
 const DescriptionContainer = styled.div`
-  padding: 20px;
+  padding: 10px;
   width: 100%; 
   
   @media (min-width: 768px) {
