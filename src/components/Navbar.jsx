@@ -8,7 +8,7 @@ import { CgProfile } from "react-icons/cg"
 import { FiLogOut } from "react-icons/fi"
 
 export const NavBar = () => {
-  const authenticated = useSelector(state => state.user.authenticated)
+  const email = useSelector(state => state.user.email)
   const items = useSelector((state) => state.items.items)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -20,6 +20,7 @@ export const NavBar = () => {
     localStorage.removeItem('userData')
     //Redirect to welcome page ('/') after signed out
     navigate('/')
+    console.log("sign out yes?: ", signOut())
   }
 
   const isLoginPage = location.pathname === '/login'
@@ -67,7 +68,7 @@ export const NavBar = () => {
         </TextWrapper>
       )}
       <NavButtonWrapper>
-        {authenticated ? (
+        {email ? (
           <>
             <NavLink to="/userpage">
               <NavButton activeClassName="active">

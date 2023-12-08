@@ -51,8 +51,6 @@ export const UserPage = () => {
     setNewPassword('')
   }
 
-  console.log('username: ', user.username)
-
   return (
     <PageContainer>
       <UserInfo>

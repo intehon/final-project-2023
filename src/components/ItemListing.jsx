@@ -49,9 +49,8 @@ export const ItemListing = () => {
 
   const reversedItems = [...items].reverse()
 
-  console.log("username: ", user.username)
-  console.log("email: ", user.email)
-  console.log("userId: ", userId)
+  console.log("email:", user.email)
+
 
   return (
     <>
