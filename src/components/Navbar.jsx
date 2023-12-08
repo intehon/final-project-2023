@@ -143,8 +143,9 @@ const NavButtonWrapper = styled.div`
 `
 
 const TextWrapper = styled.div`
-  width: 60%;
+  text-align: center;
   padding: 10px;
+  margin: 0 auto;
 
   @media (min-width: 768px) {
     width: 100%;

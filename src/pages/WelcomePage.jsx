@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 
 export const WelcomePage = () => {
-  const isAuthenticated = useSelector((state) => state.user.authenticated)
+  const email = useSelector((state) => state.user.email)
   const navigate = useNavigate()
 
   //Redirect to '/home' if user is already logged in
-  if (isAuthenticated) {
+  if (email) {
     navigate('/home')
   }
   return (

@@ -1,3 +1,5 @@
+
+
 import { configureStore } from '@reduxjs/toolkit'
 import { setEmail, setPassword, setError } from './reducers/userSlice'
 import userReducer from './reducers/userSlice'
@@ -18,7 +20,6 @@ const store = configureStore({
     items: itemsReducer,
   }
 })
-
 
 // Load user data from localStorage
 const userData = JSON.parse(localStorage.getItem('user'))
@@ -43,13 +44,11 @@ export const App = () => {
       <BrowserRouter>
         <Header />
           <Routes>
-            {/* Define your routes and components here */}
             <Route path="/" element={<WelcomePage />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/addItem" element={<AddItem />} />
             <Route path="/userPage" element={<UserPage />} />
-            {/* Add other routes as needed */}
           </Routes>
       </BrowserRouter>
     </Provider>
