@@ -45,21 +45,23 @@ export const Login = () => {
           <form onSubmit={handleLogin}>
             <FormGroup>
               <Label htmlFor="email">Email:</Label>
-              <Input
+              <InputWithError
                 type="email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmailValue(e.target.value)}
+                error={error}
               />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="password">Password:</Label>
-              <Input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPasswordValue(e.target.value)}
-              />
+              <InputWithError
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPasswordValue(e.target.value)}
+              error={error}
+            />
             </FormGroup>
             <SubmitButton type="submit">Login</SubmitButton>
           </form>

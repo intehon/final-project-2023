@@ -11,6 +11,8 @@ export const WelcomePage = () => {
   if (email) {
     navigate('/home')
   }
+
+
   return (
     <div className='pageContainer'>
       <div>

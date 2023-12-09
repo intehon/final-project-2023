@@ -33,8 +33,6 @@ export const Signup = () => {
       }
     }, [error, navigate])
 
-    console.log("username: ", username)
-
   return (
     <>
     <form onSubmit={handleSignup}>

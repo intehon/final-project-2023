@@ -57,11 +57,15 @@ const userSlice = createSlice({
       localStorage.setItem('users', JSON.stringify(state.users))
     },
     signOut: (state) => {
+      console.log('sign out reducer triggered')
       state.authenticated = false
       state.email = null
       state.password = null
       state.username = null
       state.error = null
+      console.log('Authenticated:', state.authenticated)
+      console.log('Email:', state.email)
+      console.log('Username:', state.username)
     },
     setAuthenticated: (state, action) => {
       state.authenticated = action.payload

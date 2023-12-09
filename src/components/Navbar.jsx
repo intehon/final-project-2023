@@ -20,7 +20,6 @@ export const NavBar = () => {
     localStorage.removeItem('userData')
     //Redirect to welcome page ('/') after signed out
     navigate('/')
-    console.log("sign out yes?: ", signOut())
   }
 
   const isLoginPage = location.pathname === '/login'
