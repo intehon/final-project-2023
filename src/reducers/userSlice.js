@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-// Function to retrieve user data from localStorage
-const loadUserData = () => {
-  const storedUserData = localStorage.getItem('userData')
-  return storedUserData ? JSON.parse(storedUserData) : null
+// Function to retrieve users data from localStorage
+const loadUsersData = () => {
+  const storedUsersData = localStorage.getItem('users')
+  return storedUsersData ? JSON.parse(storedUsersData) : []
 }
 
-const storedUser = loadUserData()
+const storedUsers = loadUsersData()
 
 const initialState = {
-  authenticated: !!storedUser, // Set authenticated based on stored user data
-  email: storedUser ? storedUser.email : null,
-  password: storedUser ? storedUser.password : null,
-  username: storedUser ? storedUser.username : null,
+  users: storedUsers,
+  authenticated: false, 
+  currentUser: null, 
   error: null,
 }
+
 
 const userSlice = createSlice({
   name: 'user',
@@ -34,6 +34,27 @@ const userSlice = createSlice({
     },
     setInitialState: (state, action) => {
       return initialState
+    },
+    signUp: (state, action) => {
+      const { email, password, username } = action.payload
+
+      // Check if email or username already exists
+      const isEmailRegistered = state.users.some((user) => user.email === email)
+      const isUsernameTaken = state.users.some((user) => user.username === username)
+
+      if (isEmailRegistered) {
+        state.error = 'Email is already registered. Please login instead.'
+        return
+      }
+
+      if (isUsernameTaken) {
+        state.error = 'Username already taken. Choose another one.'
+        return
+      }
+
+      // Add a new user to the array
+      state.users.push({ email, password, username })
+      localStorage.setItem('users', JSON.stringify(state.users))
     },
     signOut: (state) => {
       state.authenticated = false
@@ -65,6 +86,7 @@ export const {
   setError, 
   setInitialState, 
   signOut,
+  signUp
 } = userSlice.actions
 
 export default userSlice.reducer

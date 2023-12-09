@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setEmail, setPassword, setUsername, setError } from '../reducers/userSlice'
+import { signUp } from '../reducers/userSlice'
 import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/react'
@@ -17,37 +17,9 @@ export const Signup = () => {
   const handleSignup = (event) => {
     event.preventDefault()
   
-    // Check if email is already registered
-    const storedUserData = localStorage.getItem('userData')
-    const parsedStoredUserData = storedUserData ? JSON.parse(storedUserData)     : null
-  
-    if (parsedStoredUserData && parsedStoredUserData.email === email) {
-      dispatch(setError('Email is already registered. Please login instead.'))
-      return
-    }
-  
-    // Check if username already exists
-    if (parsedStoredUserData && parsedStoredUserData.username === username) {
-      dispatch(setError('Username already taken. Choose another one.'))
-      return
-    }
-  
-    // Continue with signup process if not already registered
-    localStorage.setItem('email', email)
-    localStorage.setItem('password', password)
-  
-    dispatch(setEmail(email))
-    dispatch(setPassword(password))
-    dispatch(setUsername(username))
-  
-    const user = {
-      email,
-      username,
-    }
-  
-    // Store user data in localStorage
-    localStorage.setItem('userData', JSON.stringify(user))
-  
+    //Dispatch action to sign up
+    dispatch(signUp({ email, password, username }))
+
     // Clear form fields after successful submission
     setEmailValue('')
     setPasswordValue('')
@@ -62,7 +34,6 @@ export const Signup = () => {
     }, [error, navigate])
 
     console.log("username: ", username)
-    console.log("email: ", email)
 
   return (
     <>

@@ -9,6 +9,7 @@ export const Login = () => {
   const [email, setEmailValue] = useState('')
   const [password, setPasswordValue] = useState('')
   const error = useSelector((state) => state.user.error)
+  const users = useSelector((state) => state.user.users)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -16,16 +17,15 @@ export const Login = () => {
   const handleLogin = (event) => {
     event.preventDefault()
 
-    const storedEmail = localStorage.getItem('email')
-    const storedPassword = localStorage.getItem('password')
+    //Find user with entered email in Redux state
+    const foundUser = users.find((user) => user.email === email)
 
-    // Simulate login verification using local state and Redux actions
-    if (email === storedEmail && password === storedPassword) {
-      // Successful login 
+    if (foundUser && foundUser.password === password) {
+      //Successful login
       dispatch(setEmail(email))
       dispatch(setPassword(password))
-      dispatch(setAuthenticated(true)) //set authenticated to true when logged in to access Home page
-      dispatch(setError('')) // Clear error message in Redux state
+      dispatch(setAuthenticated(true)) //set authenticated to true when logged in to access the Home page
+      dispatch(setError('')) //Clear error message in Redux state
 
       const user = {
         email,
