@@ -69,24 +69,24 @@ export const NavBar = () => {
       <NavButtonWrapper>
         {email ? (
           <>
-            <NavLink to="/userpage">
+            <StyledNavLink to="/userpage">
               <NavButton activeClassName="active">
-                <CgProfile />
+                Update Profile <CgProfile />
               </NavButton>
-            </NavLink>
+            </StyledNavLink>
             {isAddItemPage ? (
-            <NavButton activeClassName="active" onClick={handleGoHome}>
-              <FaHome />
-            </NavButton>
-          ) : (
-            <NavLink to="/addItem">
-              <NavButton activeClassName="active">
-                <FaPlus />
+              <NavButton activeClassName="active" onClick={handleGoHome}>
+                Explore Items <FaHome />
               </NavButton>
-            </NavLink>
-          )}
+            ) : (
+              <StyledNavLink to="/addItem">
+                <NavButton activeClassName="active">
+                  Add Items <FaPlus />
+                </NavButton>
+              </StyledNavLink>
+            )}
             <NavButton onClick={handleSignOut}>
-              <FiLogOut />
+              Logout <FiLogOut />
             </NavButton>
           </>
         ) : (
@@ -112,6 +112,9 @@ const Navbar = styled.nav`
 `
 
 const NavButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--button-color);
   color: white;
   padding: 10px 20px;
@@ -119,11 +122,14 @@ const NavButton = styled.button`
   border-radius: 4px;
   transition: background-color 0.3s ease;
   cursor: pointer;
+  gap: 10px;
+  text-decoration: none; 
 
   &:hover {
     background-color: var(--secondary-color); 
   }
-`
+`;
+
 
 const NavBarText = styled.p`
   font-size: 12px;
@@ -154,3 +160,8 @@ const TextWrapper = styled.div`
     padding: 0;
   }
 `
+
+const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  color: inherit;
+`;

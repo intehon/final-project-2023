@@ -16,13 +16,13 @@ export const WelcomePage = () => {
   return (
     <div className='pageContainer'>
       <div>
-        <WelcomeHeader>Welcome to Swapify</WelcomeHeader>
-        <WelcomeParagraph>
-          Join our vibrant sharing hub! Here, you can list treasures you're eager to share or donate and explore a treasure trove of items offered by your local community.
-        </WelcomeParagraph>
-        <WelcomeParagraph>
-          Together, let's unlock the power of sharing for Agenda 2030 goals - sharing resources, boosting sustainable living, and nurturing thriving communities! Remember, folks, sharing is caring!
-        </WelcomeParagraph>
+          <WelcomeHeader>Welcome to ShareShelf! 🌟 </WelcomeHeader>
+          <WelcomeParagraph>
+          Your hub for community sharing and caring. Explore our virtual shelves where you can add treasures you're ready to share and claim gems from others!
+          </WelcomeParagraph>
+          <WelcomeParagraph>
+          ShareShelf is your go-to spot for swapping and snagging books, tools, clothes, and more. Let's build a community where sharing is fun and caring is effortless!
+          </WelcomeParagraph>
         <div>
           <WelcomeSubHeader>Signup</WelcomeSubHeader>
           <Signup />
