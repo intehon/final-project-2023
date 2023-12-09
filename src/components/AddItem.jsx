@@ -141,15 +141,16 @@ const FileInput = styled.input`
 `
 
 const AddButton = styled.button`
-  padding: 12px 24px; /* Increase touch area and padding for mobile */
-  background-color: #e5989b;
-  color: #fff;
+  background-color: var(--button-color);
+  color: white;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
+  transition: background-color 0.3s ease;
   cursor: pointer;
 
   &:hover {
-    background-color: #ffb4a2; 
+    background-color: var(--secondary-color); 
   }
 `
 

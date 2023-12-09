@@ -9,6 +9,7 @@ import { FiHeart } from "react-icons/fi"
 import { RiDeleteBinLine } from "react-icons/ri"
 import clam from '../assets/clam.avif'
 import treasure from '../assets/treasuechest.png'
+import paperPlane from '../assets/paperplane.jpg'
 
 export const ItemListing = () => {
   const dispatch = useDispatch()
@@ -59,9 +60,9 @@ export const ItemListing = () => {
           <Loading />
         ) : items.length === 0 ? (
           <NoItemsMessage>
-            <img src={treasure} alt="No treasures" />
+            <img src={paperPlane} alt="No treasures" />
             <p>Looks like this treasure chest is waiting to be filled!</p>
-            <p>Why not start the adventure?</p>
+            <p>Why not be the first to post an item?</p>
           </NoItemsMessage>
         ) : (
           <div>
@@ -206,7 +207,7 @@ const ActionButton = styled.button`
   justify-content: center;
   align-items: center;
   margin-right: 8px;
-  background-color: ${({ isClicked }) => (isClicked ? '#e5989b' : 'white')};
+  background-color: ${({ isClicked }) => (isClicked ? '#da627d' : 'white')};
   transition: transform 0.3s ease, background-color 0.3s ease; 
 
   & > svg {
@@ -215,7 +216,7 @@ const ActionButton = styled.button`
 
   &:hover {
     transform: scale(1.1);
-    background-color: ${({ isClicked }) => (isClicked ? '#e5989b' : '#f1f1f1')}; 
+    background-color: ${({ isClicked }) => (isClicked ? '#ffa5ab' : '#f1f1f1')}; 
   }
 `
 

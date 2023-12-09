@@ -88,9 +88,10 @@ video {
 
 /* Define color variables */
 :root {
-  --main-color: #b5838d; 
-  --secondary-color: #ffb4a2; 
-  --text-color: #333; 
+  --main-color: #005F73; 
+  --secondary-color: #94D2BD; 
+  --text-color: #283618; 
+  --button-color: #0A9396;
 }
 
 body {

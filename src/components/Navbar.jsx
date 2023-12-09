@@ -112,17 +112,19 @@ const Navbar = styled.nav`
 `
 
 const NavButton = styled.button`
-  padding: 8px 16px;
+  background-color: var(--button-color);
+  color: white;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
+  transition: background-color 0.3s ease;
   cursor: pointer;
-  background-color: #e5989b;
-  color: #fff;
 
   &:hover {
-    background-color: #ffb4a2; 
+    background-color: var(--secondary-color); 
   }
 `
+
 const NavBarText = styled.p`
   font-size: 12px;
   color: rgb(162, 162, 162);

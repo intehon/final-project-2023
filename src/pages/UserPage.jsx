@@ -139,14 +139,15 @@ const FormInput = styled.input`
 `
 
 const SubmitButton = styled.button`
+  background-color: var(--button-color);
+  color: white;
   padding: 10px 20px;
-  background-color: #e5989b;
-  color: #fff;
   border: none;
   border-radius: 4px;
+  transition: background-color 0.3s ease;
   cursor: pointer;
 
   &:hover {
-    background-color: #ffb4a2;
+    background-color: var(--secondary-color); 
   }
 `
