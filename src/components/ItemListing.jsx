@@ -7,7 +7,6 @@ import moment from 'moment/moment'
 import { FiShoppingCart } from "react-icons/fi"
 import { FiHeart } from "react-icons/fi"
 import { RiDeleteBinLine } from "react-icons/ri"
-import clam from '../assets/clam.avif'
 import treasure from '../assets/treasuechest.png'
 import paperPlane from '../assets/paperplane.jpg'
 
@@ -16,7 +15,6 @@ export const ItemListing = () => {
   const [loading, setLoading] = useState(true)
   const items = useSelector((state) => state.items.items)
   const userId = useSelector((state) => state.user.userId)
-  const user = useSelector((state) => state.user)
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -49,8 +47,6 @@ export const ItemListing = () => {
   }
 
   const reversedItems = [...items].reverse()
-
-  console.log("email:", user.email)
 
 
   return (

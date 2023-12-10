@@ -22,9 +22,7 @@ export const Login = () => {
 
     if (foundUser && foundUser.password === password) {
       //Successful login
-      dispatch(setEmail(email))
-      dispatch(setPassword(password))
-      dispatch(setAuthenticated(true)) //set authenticated to true when logged in to access the Home page
+      dispatch(setAuthenticated({ authenticated: true, email, password }))
       dispatch(setError('')) //Clear error message in Redux state
 
       const user = {
@@ -37,11 +35,14 @@ export const Login = () => {
       // Unsuccessful login 
       dispatch(setError('Invalid email or password'))
     }
+
+    console.log("user: ", users)
+    console.log("email: ", email)
   }
 
   return (
       <div className='pageContainer'>
-        <FormContainer>
+        <div>
           <form onSubmit={handleLogin}>
             <FormGroup>
               <Label htmlFor="email">Email:</Label>
@@ -65,7 +66,7 @@ export const Login = () => {
             </FormGroup>
             <SubmitButton type="submit">Login</SubmitButton>
           </form>
-        </FormContainer>
+        </div>
           {error && (
         <ErrorMessage>
           {error}
@@ -75,10 +76,6 @@ export const Login = () => {
   )
 }
 
-const FormContainer = styled.div`
-  width: 300px;
-  padding-top: 20px;
-`
 
 const FormGroup = styled.div`
   margin-bottom: 15px;

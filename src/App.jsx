@@ -1,19 +1,18 @@
-
-
 import { configureStore } from '@reduxjs/toolkit'
-import { setEmail, setPassword, setError } from './reducers/userSlice'
+import { setUser } from './reducers/userSlice'
+import { setItems } from './reducers/itemSlice'
 import userReducer from './reducers/userSlice'
 import itemsReducer from './reducers/itemSlice'
-import { Provider } from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { setItems } from './reducers/itemSlice'
 import { WelcomePage } from './pages/WelcomePage'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { AddItem } from './components/AddItem'
 import { Header } from './components/Header'
 import { UserPage } from './pages/UserPage'
-import { SignUp } from './pages/SignUp'
+import { Signup } from './pages/Signup'
+import { PageAdmin } from './pages/PageAdmin'
 
 const store = configureStore({
   reducer: {
@@ -24,8 +23,7 @@ const store = configureStore({
 
 // Load user data from localStorage
 const userData = JSON.parse(localStorage.getItem('user'))
-if (userData) {
-  // store.dispatch(setUserId(userData.userId))
+if (userData && userData.email && userData.password && userData.error) {
   store.dispatch(setEmail(userData.email))
   store.dispatch(setPassword(userData.password))
   store.dispatch(setError(userData.error))
@@ -46,11 +44,12 @@ export const App = () => {
         <Header />
           <Routes>
             <Route path="/" element={<WelcomePage />} />
-            <Route path="/signup" element={<SignUp />} /> 
+            <Route path="/signup" element={<Signup />} /> 
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/addItem" element={<AddItem />} />
             <Route path="/userPage" element={<UserPage />} />
+            <Route path='/admin' element={<PageAdmin />} />
           </Routes>
       </BrowserRouter>
     </Provider>

@@ -1,24 +1,24 @@
-import { useNavigate, Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
-import logo from '../assets/logo_transparent.png'
 
 export const WelcomePage = () => {
-  const email = useSelector((state) => state.user.email)
+  const isAuthenticated = useSelector((state) => state.user.authenticated)
   const navigate = useNavigate()
 
-  //Redirect to '/home' if user is already logged in
-  if (email) {
-    navigate('/home')
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/home')
+    }
+  }, [isAuthenticated, navigate])
+
+  console.log("is authenticated? ", isAuthenticated)
 
 
   return (
     <div className='pageContainer'>
       <ContentContainer>
-          <LogoContainer>
-            <img src={logo} alt="ShareShelf logo" />
-          </LogoContainer>
           <WelcomeParagraph>
             Your hub for community sharing and caring. Explore our virtual shelves where you can add treasures you're ready to share and claim gems from others!
           </WelcomeParagraph>
@@ -36,22 +36,8 @@ export const WelcomePage = () => {
 }
 
 
-
-
 const ContentContainer = styled.div`
   text-align: center;
-`
-
-const LogoContainer = styled.div`
-  margin: 0 auto;
-  max-width: 180px; 
-  
-  img {
-    width: 100%; 
-    height: auto; 
-    display: block;
-    margin: 0 auto; 
-  }
 `
 
 const WelcomeParagraph = styled.p`

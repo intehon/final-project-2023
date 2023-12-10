@@ -8,7 +8,7 @@ import { CgProfile } from "react-icons/cg"
 import { FiLogOut, FiLogIn } from "react-icons/fi"
 
 export const NavBar = () => {
-  const email = useSelector(state => state.user.email)
+  const isAuthenticated = useSelector((state) => state.user.authenticated)
   const items = useSelector((state) => state.items.items)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -67,7 +67,7 @@ export const NavBar = () => {
         </TextWrapper>
       )}
       <NavButtonWrapper>
-        {email ? (
+        {isAuthenticated ? (
           <>
             <StyledNavLink to="/userpage">
               <NavButton activeClassName="active">

@@ -1,23 +1,37 @@
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { ItemListing } from '../components/ItemListing'
+import { setAuthenticated } from '../reducers/userSlice'
+import { ItemListing } from '../components/ItemListing';
 
 export const Home = () => {
-    // const userId = useSelector(state => state.user.userId) //Get userID from redux
-    const email = useSelector(state => state.user.email)
-    const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const isAuthenticated = useSelector((state) => state.user.authenticated)
 
-    useEffect(() => {
-     //If not signed in, return to welcome page
-        if (!email) {
-          navigate('/')
-        }
-      }, [email, navigate])
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/')
+    }
+  }, [isAuthenticated, navigate])
+
+  useEffect(() => {
+    const storedUserData = JSON.parse(localStorage.getItem('userData'))
+  
+    if (storedUserData && storedUserData.authenticated) {
+      dispatch(setAuthenticated(storedUserData));
+    }
+  }, [dispatch])
+
+
+  const storedUserData = useSelector((state) => state.user)
+
+  console.log('Stored userData: ', storedUserData)
+
 
     return (
         <div className='pageContainer'>
-            <ItemListing />
+      {isAuthenticated ? <ItemListing /> : null}
         </div>
     )
 }

@@ -1,41 +1,48 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signUp } from '../reducers/userSlice'
+import { setPassword, setEmail, setUsername, setAuthenticated, setError, signUp } from '../reducers/userSlice'
 import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/react'
 
-export const SignUp = () => {
+export const Signup = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [email, setEmailValue] = useState('')
   const [password, setPasswordValue] = useState('')
   const [username, setUsernameValue] = useState('')
-
   const error = useSelector((state) => state.user.error)
 
-  const handleSignUp = (event) => {
+  const handleSignup = (event) => {
     event.preventDefault()
-  
-    //Dispatch action to sign up
-    dispatch(signUp({ email, password, username }))
+
+    // Store user data in localStorage
+    const userData = {
+      email,
+      username,
+      authenticated: true,
+    }
+
+    localStorage.setItem('userData', JSON.stringify(userData))
+
+    //check how setAuthenticated is dispatched in Signup component
+    const payload = { authenticated: true, email, password }
+    console.log('Payload before dispatching setAuthenticated:', payload)
+
+    dispatch(setAuthenticated({ authenticated: true, email, password }))
 
     // Clear form fields after successful submission
     setEmailValue('')
     setPasswordValue('')
     setUsernameValue('')
-  }
 
-    //Redirect to home page only when there is no error
-    useEffect(() => {
-      if (!error) {
-        navigate('/')
-      }
-    }, [error, navigate])
+    //Redirect to home page
+    navigate('/home')
+    }
 
   return (
-    <>
-    <form onSubmit={handleSignUp}>
+    <div className='pageContainer'>
+    <form onSubmit={handleSignup}>
       <FormGroup>
         <Label htmlFor="email">Email:</Label>
         <InputWithError
@@ -53,6 +60,7 @@ export const SignUp = () => {
             id="username"
             value={username}
             onChange={(e) => setUsernameValue(e.target.value)}
+            error={error}
           />
         </FormGroup>
     <FormGroup>
@@ -65,19 +73,20 @@ export const SignUp = () => {
         error={error}
       />
     </FormGroup>
-    <SubmitButton type="submit">Signup</SubmitButton>
+    <SubmitButton type="submit">Register</SubmitButton>
     </form>
       {error && (
       <ErrorMessage>
         {error}
       </ErrorMessage>
     )}
-    </>
+    </div>
   )
 }
 
 const FormGroup = styled.div`
   margin-bottom: 15px;
+  padding-top: 20px;
 `
 
 const Label = styled.label`
@@ -112,7 +121,6 @@ const ErrorMessage = styled.div`
   margin-top: 5px;
   font-size: 12px;
 `
-
 const shakeAnimation = keyframes`
   0% {
     transform: translateX(0);
