@@ -15,6 +15,9 @@ export const NavBar = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
+  const { pathname } = useLocation()
+  const isWelcomePage = pathname === '/'
+
   const handleSignOut = () => {
     dispatch(signOut())
     // Clear user data from localStorage
@@ -99,7 +102,7 @@ export const NavBar = () => {
           <NavButton onClick={handleLoginOrBack}>{buttonText}</NavButton>
         )}
     </Navbar>
-    {!isAuthenticated && ( 
+    {!isAuthenticated && !isWelcomePage && ( 
               <LogoContainer>
               <img src={logo} alt="ShareShelf logo" />
             </LogoContainer>  
