@@ -77,6 +77,7 @@ export const Login = () => {
 
 const FormContainer = styled.div`
   width: 300px;
+  padding-top: 20px;
 `
 
 const FormGroup = styled.div`

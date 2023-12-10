@@ -98,15 +98,15 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: var(--text-color);
+  overflow-x: hidden;
 }
 
 /* Mobile-first styles */
 .pageContainer {
-  padding: 20px;
+  padding: 0 20px;
   box-sizing: border-box;
-  border-radius: 8px;
   background-color: white;
-  max-width: 100%;
+  max-width: 300px;
   margin: 0 auto; 
 }
 
@@ -172,16 +172,17 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Media query for larger screens (e.g., desktop) */
+/* Media query for larger screens */
 @media (min-width: 768px) {
   .pageContainer {
-    padding: 30px; 
+    width: 100%;
+    padding: 0 30px; 
   }
 }
 
-/* Media query for even larger screens (adjust max-width as needed) */
+/* Media query for even larger screens */
 @media (min-width: 1200px) {
   .pageContainer {
-    max-width: 500px; /* Set maximum width for larger desktop screens */
+    max-width: 500px; 
   }
 }

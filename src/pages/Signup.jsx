@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/react'
 
-export const Signup = () => {
+export const SignUp = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [email, setEmailValue] = useState('')
@@ -14,7 +14,7 @@ export const Signup = () => {
 
   const error = useSelector((state) => state.user.error)
 
-  const handleSignup = (event) => {
+  const handleSignUp = (event) => {
     event.preventDefault()
   
     //Dispatch action to sign up
@@ -35,7 +35,7 @@ export const Signup = () => {
 
   return (
     <>
-    <form onSubmit={handleSignup}>
+    <form onSubmit={handleSignUp}>
       <FormGroup>
         <Label htmlFor="email">Email:</Label>
         <InputWithError

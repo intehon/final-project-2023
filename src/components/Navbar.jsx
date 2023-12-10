@@ -5,7 +5,7 @@ import { signOut } from '../reducers/userSlice'
 import { FaPlus} from "react-icons/fa6"
 import { FaHome } from "react-icons/fa"
 import { CgProfile } from "react-icons/cg"
-import { FiLogOut } from "react-icons/fi"
+import { FiLogOut, FiLogIn } from "react-icons/fi"
 
 export const NavBar = () => {
   const email = useSelector(state => state.user.email)

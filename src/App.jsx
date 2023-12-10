@@ -13,6 +13,7 @@ import { Login } from './pages/Login'
 import { AddItem } from './components/AddItem'
 import { Header } from './components/Header'
 import { UserPage } from './pages/UserPage'
+import { SignUp } from './pages/SignUp'
 
 const store = configureStore({
   reducer: {
@@ -45,6 +46,7 @@ export const App = () => {
         <Header />
           <Routes>
             <Route path="/" element={<WelcomePage />} />
+            <Route path="/signup" element={<SignUp />} /> 
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/addItem" element={<AddItem />} />
