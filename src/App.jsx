@@ -16,6 +16,7 @@ import { Signup } from './pages/Signup'
 import { PageAdmin } from './pages/PageAdmin'
 import { Sidebar } from './components/Sidebar'
 import { SignOut } from './pages/SignOut'
+import { NotFoundPage } from './components/NotFoundPage'
 
 
 const store = configureStore({
@@ -62,6 +63,7 @@ export const App = () => {
               <Route path="/userPage" element={<UserPage />} />
               <Route path='/admin' element={<PageAdmin />} />
               <Route path='/signOut' element={<SignOut />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
       </BrowserRouter>
     </Provider>
