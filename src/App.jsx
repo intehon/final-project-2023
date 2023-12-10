@@ -15,6 +15,7 @@ import { UserPage } from './pages/UserPage'
 import { Signup } from './pages/Signup'
 import { PageAdmin } from './pages/PageAdmin'
 import { Sidebar } from './components/Sidebar'
+import { SignOut } from './pages/SignOut'
 
 
 const store = configureStore({
@@ -60,6 +61,7 @@ export const App = () => {
               <Route path="/addItem" element={<AddItem />} />
               <Route path="/userPage" element={<UserPage />} />
               <Route path='/admin' element={<PageAdmin />} />
+              <Route path='/signOut' element={<SignOut />} />
             </Routes>
       </BrowserRouter>
     </Provider>

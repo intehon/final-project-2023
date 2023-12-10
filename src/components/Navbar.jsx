@@ -5,7 +5,8 @@ import { signOut } from '../reducers/userSlice'
 import { FaPlus} from "react-icons/fa6"
 import { FaHome } from "react-icons/fa"
 import { CgProfile } from "react-icons/cg"
-import { FiLogOut, FiLogIn } from "react-icons/fi"
+import { FiLogOut } from "react-icons/fi"
+import logo from '../assets/logo_transparent.png'
 
 export const NavBar = () => {
   const isAuthenticated = useSelector((state) => state.user.authenticated)
@@ -51,24 +52,25 @@ export const NavBar = () => {
   const showNoItemsText = totalItems === 0
 
   return (
-    <Navbar>
- {showNoItemsText ? (
-        <TextWrapper>
-          <NavBarText>
-            Unlock the magic of sharing. Turn your cherished belongings into someone else's treasure. 🧙🏽
-          </NavBarText>
-        </TextWrapper>
-      ) : (
-        <TextWrapper>
-          <NavBarText>
-            {unclaimedItems} out of {totalItems} items are still up for grabs!</NavBarText>
-            <NavBarText>Go get it! *grab grab* 🦀
-          </NavBarText>
-        </TextWrapper>
-      )}
-        <MobileOnly>
-        {isAuthenticated ? (
-          <>
+    <>
+      <Navbar>
+  {showNoItemsText ? (
+          <TextWrapper>
+            <NavBarText>
+              Unlock the magic of sharing. Turn your cherished belongings into someone else's treasure. 🧙🏽
+            </NavBarText>
+          </TextWrapper>
+        ) : (
+          <TextWrapper>
+            <NavBarText>
+              {unclaimedItems} out of {totalItems} items are still up for grabs!</NavBarText>
+              <NavBarText>Go get it! *grab grab* 🦀
+            </NavBarText>
+          </TextWrapper>
+        )}
+          <MobileOnly>
+          {isAuthenticated ? (
+            <>
             <StyledNavLink to="/userpage">
               <NavButton activeClassName="active">
                 Update Profile <CgProfile />
@@ -97,6 +99,14 @@ export const NavBar = () => {
           <NavButton onClick={handleLoginOrBack}>{buttonText}</NavButton>
         )}
     </Navbar>
+    {!isAuthenticated && ( 
+              <LogoContainer>
+              <img src={logo} alt="ShareShelf logo" />
+            </LogoContainer>  
+        )}
+
+          </>
+    
   )
 }
 
@@ -165,5 +175,18 @@ const MobileOnly = styled.div`
 
   @media (min-width: 768px) {
     display: none; 
+  }
+`
+
+const LogoContainer = styled.div`
+  margin: 0 auto;
+  max-width: 180px; 
+  padding: 10px;
+  
+  img {
+    width: 100%; 
+    height: auto; 
+    display: block;
+    margin: 0 auto; 
   }
 `

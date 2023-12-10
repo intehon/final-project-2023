@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, Routes, Route } from 'react-router-dom'
+import { NavLink, useNavigate  } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from '@emotion/styled'
 import logo from '../assets/logo_transparent.png'
@@ -11,14 +11,7 @@ import { clearAuthData } from '../reducers/authSlice'
 export const Sidebar = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    // const isUserAuthenticated = useSelector((state) => state.user.isAuthenticated)
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
     const isUserAuthenticated = useSelector((state) => state.user.authenticated)
-
-    //Render sidebar only if user signed in
-    // if (!isAuthenticated) {
-    //     return null
-    // }
 
     if (!isUserAuthenticated) {
         return null
@@ -30,9 +23,7 @@ export const Sidebar = () => {
         localStorage.removeItem('userData')
         navigate('/')
       }
-      
-      console.log("is auth?: ", isAuthenticated)
-      console.log("is user auth? ", isUserAuthenticated)
+
 
     return (
         <SidebarContainer>
@@ -78,7 +69,7 @@ export const Sidebar = () => {
     @media (max-width: 768px) {
       display: none;
     }
-  `;
+  `
   
   const SidebarLink = styled(NavLink)`
     display: flex;
@@ -91,9 +82,8 @@ export const Sidebar = () => {
   
     &:hover {
       background-color: #99b0b6;
-      /* color: #ccc; */
     }
-  `;
+  `
   
   const LogoContainer = styled.div`
     margin: 0 auto;
@@ -106,10 +96,10 @@ export const Sidebar = () => {
       display: block;
       margin: 0 auto;
     }
-  `;
+  `
   
   const IconWrapper = styled.span`
     margin-right: 10px;
     display: flex;
     align-items: center;
-  `;
+  `

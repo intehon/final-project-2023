@@ -11,39 +11,34 @@ export const Login = () => {
   const [password, setPasswordValue] = useState('')
   const error = useSelector((state) => state.user.error)
   const users = useSelector((state) => state.user.users)
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleLogin = (event) => {
     event.preventDefault()
-
-    //Find user with entered email in Redux state
+  
+    // Find user with entered email in Redux state
     const foundUser = users.find((user) => user.email === email)
-
+  
     if (foundUser && foundUser.password === password) {
-
       const userData = {
         username: foundUser.username,
         email: foundUser.email,
+        password: foundUser.password,
+        authenticated: true,
       }
-
-      localStorage.setItem('userData', JSON.stringify({ email, password, username: foundUser.username, authenticated: true }))
-
-      //Successful login
-      dispatch(setUserAuthenticated({ authenticated: true, email, password }))  
-      dispatch(setError('')) //Clear error message in Redux state
-      dispatch(setCurrentUser(userData)) //Dispatch action to set current user after successful login
-
-      navigate('/home') // Navigate to the '/home' route after successful login
+  
+      // Successful login, set user data in localStorage and Redux state
+      localStorage.setItem('userData', JSON.stringify(userData))
+  
+      //Dispatch action to set current user after successful login
+      dispatch(setUserAuthenticated(userData));
+  
+      navigate('/home')
     } else {
-      // Unsuccessful login 
+      // Unsuccessful login
       dispatch(setError('Invalid email or password'))
     }
-
-    console.log("user: ", users)
-    console.log("email: ", email)
-    console.log("username: ", foundUser.username)
   }
 
   return (

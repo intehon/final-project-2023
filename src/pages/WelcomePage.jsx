@@ -5,6 +5,7 @@ import styled from '@emotion/styled'
 
 export const WelcomePage = () => {
   const isAuthenticated = useSelector((state) => state.user.authenticated)
+  const isUserAuthenticated = useSelector((state) => state.user.authenticated)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -13,7 +14,8 @@ export const WelcomePage = () => {
     }
   }, [isAuthenticated, navigate])
 
-  console.log("is authenticated? ", isAuthenticated)
+  console.log("user auth? ", isUserAuthenticated)
+  console.log("auth? ", isAuthenticated)
 
 
   return (

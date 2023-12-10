@@ -121,7 +121,7 @@ const FormContainer = styled.div`
 const TitleInput = styled.input`
   width: 100%;
   margin-bottom: 10px;
-  padding: 12px; /* Adjust padding for better touch interaction */
+  padding: 12px; 
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -130,7 +130,7 @@ const TitleInput = styled.input`
 const DescriptionTextarea = styled.textarea`
   width: 100%;
   margin-bottom: 10px;
-  padding: 12px; /* Adjust padding for better touch interaction */
+  padding: 12px; 
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;

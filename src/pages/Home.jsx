@@ -23,7 +23,7 @@ export const Home = () => {
     }
   }, [dispatch])
 
-
+  //Error tracking
   const storedUserData = useSelector((state) => state.user)
 
   console.log('Stored userData: ', storedUserData)

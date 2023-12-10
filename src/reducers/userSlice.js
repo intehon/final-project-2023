@@ -39,7 +39,7 @@ const userSlice = createSlice({
         state.password = password
         localStorage.setItem('userData', JSON.stringify({ email, password, authenticated: true }))
       } else {
-        localStorage.removeItem('userData');
+        localStorage.removeItem('userData')
       }
     },
     setError: (state, action) => {
@@ -77,15 +77,15 @@ const userSlice = createSlice({
     }
   },
     signOut: (state) => {
-      state.authenticated = false;
+      state.authenticated = false
     },
     setUser: (state, action) => {
-      const { email, password, username, error, isAuthenticated } = action.payload;
-      state.email = email;
-      state.password = password;
-      state.username = username;
-      state.error = error;
-      state.authenticated = isAuthenticated;
+      const { email, password, username, error, isAuthenticated } = action.payload
+      state.email = email
+      state.password = password
+      state.username = username
+      state.error = error
+      state.authenticated = isAuthenticated
     },
     deleteAllUsers: (state) => {
       state.users = [] //Reset the users array to an empty array

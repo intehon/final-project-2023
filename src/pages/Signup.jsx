@@ -41,10 +41,10 @@ export const Signup = () => {
     localStorage.setItem('userData', JSON.stringify(userData))
 
     //check how setAuthenticated is dispatched in Signup component
-    const payload = { authenticated: true, email, password }
+    const payload = { authenticated: true, email, password, username }
     console.log('Payload before dispatching setAuthenticated:', payload)
 
-    dispatch(setUserAuthenticated({ authenticated: true, email, password }))
+    dispatch(setUserAuthenticated({ authenticated: true, email, password, username }))
     dispatch(setAuthenticated({ authenticated: true, ...userData }))
 
     // Clear form fields after successful submission

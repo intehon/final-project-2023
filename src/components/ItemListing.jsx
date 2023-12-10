@@ -122,16 +122,26 @@ const ItemContainer = styled.div`
   gap: 5px;
   margin-bottom: 20px;
   border-bottom: 1px solid #ADC2D3;
-  max-width: 100%;
+  max-width: 1200px;
+  width: 150%;
   box-sizing: border-box;
   background-color: white;
   padding: 5px;
+  margin-left: -25%; 
+  margin-right: -25%; 
 
   @media (min-width: 768px) {
     align-items: center;
+    width: 120%; 
+    margin: 0 auto;
+    max-width: 1200px; 
+  }
+
+  @media (min-width: 1200px) {
+    width: 100%;
+    margin: 0 auto;
   }
 `
-
 const Title = styled.p`
   font-weight: bold;
   margin-bottom: 8px;
@@ -145,12 +155,15 @@ const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Image = styled.div`
   width: 100%;
   height: 300px;
-  /* display: block; */
+  display: block;
   border: 2px solid white;
   overflow: hidden;
   background-image: ${({ src }) => (src ? `url(${src})` : 'none')};
@@ -159,7 +172,7 @@ const Image = styled.div`
   background-repeat: no-repeat;
 
   @media (min-width: 768px) and (max-width: 900px) {
-    height: 250px; 
+    height: 300px; 
   }
 
   @media (min-width: 901px) {
@@ -174,8 +187,10 @@ const ActionContainer = styled.div`
   width: 100%; 
   
   @media (min-width: 768px) {
-    width: 100%; /
+    width: 90%;
+    margin: 0 auto; 
     padding: 10px; 
+    max-width: 1200px; 
   }
 `
 
@@ -195,9 +210,12 @@ const UserDetails = styled.div`
   width: 100%;
 
   @media (min-width: 768px) {
-    width: auto; 
+    width: 90%; 
+    margin: 0 auto; 
+    max-width: 1200px; 
   }
 `
+
 
 const ActionButton = styled.button`
   width: 40px; 
@@ -241,8 +259,9 @@ const DescriptionContainer = styled.div`
   width: 100%; 
   
   @media (min-width: 768px) {
-    width: 100%; 
-    padding: 10px; 
+    width: 90%;
+    margin: 0 auto; 
+    max-width: 1200px; 
   }
 `
 
