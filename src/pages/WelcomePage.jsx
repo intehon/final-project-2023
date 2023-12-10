@@ -27,7 +27,7 @@ export const WelcomePage = () => {
           </WelcomeParagraph>
         <div>
           <WelcomeSubHeader>
-            <button onClick={() => navigate('/signup')}>Register</button>
+            <Button onClick={() => navigate('/signup')}>Register</Button>
           </WelcomeSubHeader>
         </div>
       </ContentContainer>
@@ -47,4 +47,18 @@ const WelcomeParagraph = styled.p`
 const WelcomeSubHeader = styled.h2`
   margin-top: 20px;
   margin-bottom: 10px;
+`
+
+const Button = styled.button`
+  background-color: var(--button-color);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--secondary-color); 
+  }
 `

@@ -65,12 +65,12 @@ export const ItemListing = () => {
             {reversedItems.map((item) => (
              <ItemContainer key={item.id}>
             {item.imageUrl ? (
+              <ImageContainer>
               <Image src={item.imageUrl} alt={item.title} />
+              </ImageContainer>
             ) : (
               <DefaultImage src={treasure} alt="Default Image" />
             )}
-             <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-               <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                <ActionContainer>
                  <ActionButton onClick={() => handleClaimItem(item.id)} isClicked={item.isClaimed}>
                    <FiShoppingCart />
@@ -98,8 +98,6 @@ export const ItemListing = () => {
                      <p>x {item.likes ? item.likes.length : 0}</p>
                    </LikeContainer>
                  </UserDetails>
-               </div>
-             </div>
            </ItemContainer>
             ))}
           </div>
@@ -127,7 +125,7 @@ const ItemContainer = styled.div`
   max-width: 100%;
   box-sizing: border-box;
   background-color: white;
-  padding: 20px;
+  padding: 5px;
 
   @media (min-width: 768px) {
     align-items: center;
@@ -143,9 +141,16 @@ const Description = styled.p`
   margin-bottom: 8px;
 `
 
+const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+`
+
 const Image = styled.div`
   width: 100%;
   height: 300px;
+  /* display: block; */
   border: 2px solid white;
   overflow: hidden;
   background-image: ${({ src }) => (src ? `url(${src})` : 'none')};

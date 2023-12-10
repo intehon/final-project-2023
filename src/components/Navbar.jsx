@@ -66,7 +66,7 @@ export const NavBar = () => {
           </NavBarText>
         </TextWrapper>
       )}
-      <NavButtonWrapper>
+        <MobileOnly>
         {isAuthenticated ? (
           <>
             <StyledNavLink to="/userpage">
@@ -74,25 +74,28 @@ export const NavBar = () => {
                 Update Profile <CgProfile />
               </NavButton>
             </StyledNavLink>
-            {isAddItemPage ? (
-              <NavButton activeClassName="active" onClick={handleGoHome}>
-                Explore Items <FaHome />
-              </NavButton>
-            ) : (
-              <StyledNavLink to="/addItem">
-                <NavButton activeClassName="active">
-                  Add Items <FaPlus />
+              {isAddItemPage ? (
+                <NavButton activeClassName="active" onClick={handleGoHome}>
+                  Explore Items <FaHome />
                 </NavButton>
-              </StyledNavLink>
-            )}
-            <NavButton onClick={handleSignOut}>
-              Logout <FiLogOut />
-            </NavButton>
-          </>
-        ) : (
+              ) : (
+                <StyledNavLink to="/addItem">
+                  <NavButton activeClassName="active">
+                    Add Items <FaPlus />
+                  </NavButton>
+                </StyledNavLink>
+              )}
+              <NavButton onClick={handleSignOut}>
+                Logout <FiLogOut />
+              </NavButton>
+            </>
+          ) : (
+            null
+          )}
+        </MobileOnly>
+        {!isAuthenticated && (
           <NavButton onClick={handleLoginOrBack}>{buttonText}</NavButton>
         )}
-      </NavButtonWrapper>
     </Navbar>
   )
 }
@@ -100,13 +103,14 @@ export const NavBar = () => {
 const Navbar = styled.nav`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
 
   @media (min-width: 768px) {
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: row; 
+    justify-content: center;
     align-items: center;
   }
 `
@@ -117,37 +121,24 @@ const NavButton = styled.button`
   justify-content: center;
   background-color: var(--button-color);
   color: white;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border: none;
   border-radius: 4px;
   transition: background-color 0.3s ease;
   cursor: pointer;
   gap: 10px;
   text-decoration: none; 
+  font-size: 12px;
 
   &:hover {
     background-color: var(--secondary-color); 
   }
-`;
+`
 
 
 const NavBarText = styled.p`
   font-size: 12px;
   color: rgb(162, 162, 162);
-`
-
-const NavButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: row; 
-  justify-content: center; 
-  width: 100%; 
-  margin-top: 8px; 
-  gap: 10px;
-
-  @media (min-width: 768px) {
-    justify-content: flex-end;
-    margin-top: 0; 
-  }
 `
 
 const TextWrapper = styled.div`
@@ -164,4 +155,15 @@ const TextWrapper = styled.div`
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   color: inherit;
-`;
+`
+
+const MobileOnly = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px; 
+
+  @media (min-width: 768px) {
+    display: none; 
+  }
+`

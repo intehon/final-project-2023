@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setAuthenticated } from '../reducers/userSlice'
+import { setUserAuthenticated } from '../reducers/userSlice'
 import { ItemListing } from '../components/ItemListing';
 
 export const Home = () => {
@@ -19,7 +19,7 @@ export const Home = () => {
     const storedUserData = JSON.parse(localStorage.getItem('userData'))
   
     if (storedUserData && storedUserData.authenticated) {
-      dispatch(setAuthenticated(storedUserData));
+      dispatch(setUserAuthenticated(storedUserData));
     }
   }, [dispatch])
 

@@ -1,14 +1,19 @@
+import { useSelector } from 'react-redux'
 import { NavBar } from './Navbar'
 import styled from '@emotion/styled'
 import logo from '../assets/logo_transparent.png'
 
 export const Header = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+
   return (
     <HeaderContainer>
       <NavBar />
-      <LogoContainer>
-        <img src={logo} alt="ShareShelf logo" />
-      </LogoContainer>
+      {!isAuthenticated && ( //render the logo only if not authenticated
+        <LogoContainer>
+          <img src={logo} alt="ShareShelf logo" />
+        </LogoContainer>
+      )}
     </HeaderContainer>
   )
 }

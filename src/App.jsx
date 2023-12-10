@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { setUser } from './reducers/userSlice'
+import { setUserAuthenticated, setEmail, setPassword } from './reducers/userSlice'
 import { setItems } from './reducers/itemSlice'
 import userReducer from './reducers/userSlice'
 import itemsReducer from './reducers/itemSlice'
-import { Provider, useDispatch } from 'react-redux'
+import authReducer from './reducers/authSlice'
+import { Provider } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { WelcomePage } from './pages/WelcomePage'
 import { Home } from './pages/Home'
@@ -13,21 +14,29 @@ import { Header } from './components/Header'
 import { UserPage } from './pages/UserPage'
 import { Signup } from './pages/Signup'
 import { PageAdmin } from './pages/PageAdmin'
+import { Sidebar } from './components/Sidebar'
+
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     items: itemsReducer,
+    auth: authReducer,
   }
 })
 
 // Load user data from localStorage
-const userData = JSON.parse(localStorage.getItem('user'))
-if (userData && userData.email && userData.password && userData.error) {
-  store.dispatch(setEmail(userData.email))
-  store.dispatch(setPassword(userData.password))
-  store.dispatch(setError(userData.error))
+const userData = JSON.parse(localStorage.getItem('userData'))
+if (userData) {
+  const { authenticated, email, password } = userData
+
+  if (typeof authenticated === 'boolean' && email && password) {
+    store.dispatch(setUserAuthenticated(authenticated))
+    store.dispatch(setEmail(email))
+    store.dispatch(setPassword(password))
+  }
 }
+
 
 // Load items data from localStorage
 const storedItems = localStorage.getItem('items')
@@ -41,16 +50,17 @@ export const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Header />
-          <Routes>
-            <Route path="/" element={<WelcomePage />} />
-            <Route path="/signup" element={<Signup />} /> 
-            <Route path="/login" element={<Login />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/addItem" element={<AddItem />} />
-            <Route path="/userPage" element={<UserPage />} />
-            <Route path='/admin' element={<PageAdmin />} />
-          </Routes>
+          <Header />
+          <Sidebar/>
+            <Routes>
+              <Route path="/" element={<WelcomePage />} />
+              <Route path="/signup" element={<Signup />} /> 
+              <Route path="/login" element={<Login />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/addItem" element={<AddItem />} />
+              <Route path="/userPage" element={<UserPage />} />
+              <Route path='/admin' element={<PageAdmin />} />
+            </Routes>
       </BrowserRouter>
     </Provider>
     )

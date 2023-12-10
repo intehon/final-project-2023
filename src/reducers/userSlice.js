@@ -13,6 +13,7 @@ const initialState = {
   authenticated: false,
   email: '',
   password: '',
+  username: '',
   error: null,
 }
 
@@ -29,14 +30,14 @@ const userSlice = createSlice({
     setUsername: (state, action) => {
       state.username = action.payload
     },
-    setAuthenticated: (state, action) => {
-      state.authenticated = action.payload.authenticated;
-    
+    setUserAuthenticated: (state, action) => {
+      state.authenticated = action.payload.authenticated
+
       if (action.payload.authenticated) {
-        const { email, password } = action.payload;
-        state.email = email;
-        state.password = password;
-        localStorage.setItem('userData', JSON.stringify({ email, password }));
+        const { email, password } = action.payload
+        state.email = email
+        state.password = password
+        localStorage.setItem('userData', JSON.stringify({ email, password, authenticated: true }))
       } else {
         localStorage.removeItem('userData');
       }
@@ -54,32 +55,35 @@ const userSlice = createSlice({
       const isUsernameTaken = state.users.some((user) => user.username === username)
     
       if (!isEmailRegistered && !isUsernameTaken) {
-        // Add a new user to the array
-        state.users.push({ email, password, username });
-        localStorage.setItem('users', JSON.stringify(state.users));
-    
-        // Dispatch setAuthenticated action after successful signup
+        // Add a new user to the array only if the user doesn't already exist
+        state.users.push({ email, password, username })
+        localStorage.setItem('users', JSON.stringify(state.users))
+      
+        // Dispatch actions after successful signup
         dispatch(
-          setAuthenticated({
+          setUserAuthenticated({
             authenticated: true,
             email,
             password,
           })
-        );
+        )
+      } else {
+        if (isEmailRegistered) {
+          dispatch(setError('Email already registered.'))
+        }
+        if (isUsernameTaken) {
+          dispatch(setError('Username already exists.'))
       }
-    },
+    }
+  },
     signOut: (state) => {
-      console.log('sign out reducer triggered')
-      state.authenticated = false
-      state.email = null
-      state.password = null
-      state.username = null
-      state.error = null
+      state.authenticated = false;
     },
     setUser: (state, action) => {
-      const { email, password, error, isAuthenticated } = action.payload;
+      const { email, password, username, error, isAuthenticated } = action.payload;
       state.email = email;
       state.password = password;
+      state.username = username;
       state.error = error;
       state.authenticated = isAuthenticated;
     },
@@ -90,7 +94,7 @@ const userSlice = createSlice({
 })
 
 export const { 
-  setAuthenticated, 
+  setUserAuthenticated, 
   setEmail, 
   setPassword, 
   setUsername,

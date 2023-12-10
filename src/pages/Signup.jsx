@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setPassword, setEmail, setUsername, setAuthenticated, setError, signUp } from '../reducers/userSlice'
+import { setError, setUserAuthenticated  } from '../reducers/userSlice'
+import { setAuthenticated } from '../reducers/authSlice'
 import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/react'
@@ -12,9 +13,23 @@ export const Signup = () => {
   const [password, setPasswordValue] = useState('')
   const [username, setUsernameValue] = useState('')
   const error = useSelector((state) => state.user.error)
+  const existingUsers = useSelector((state) => state.user.users)
 
   const handleSignup = (event) => {
     event.preventDefault()
+
+    const isUserNameExisting = existingUsers.some((user) => user.username === username)
+    const isUserEmailExisting = existingUsers.some((user) => user.email === email)
+  
+    if (isUserNameExisting) {
+      dispatch(setError('Username already exists.'))
+      return
+    }
+  
+    if (isUserEmailExisting) {
+      dispatch(setError('Email already exists.'))
+      return
+    }
 
     // Store user data in localStorage
     const userData = {
@@ -29,7 +44,8 @@ export const Signup = () => {
     const payload = { authenticated: true, email, password }
     console.log('Payload before dispatching setAuthenticated:', payload)
 
-    dispatch(setAuthenticated({ authenticated: true, email, password }))
+    dispatch(setUserAuthenticated({ authenticated: true, email, password }))
+    dispatch(setAuthenticated({ authenticated: true, ...userData }))
 
     // Clear form fields after successful submission
     setEmailValue('')
@@ -118,7 +134,7 @@ const SubmitButton = styled.button`
 const ErrorMessage = styled.div`
   color: red;
   font-style: italic;
-  margin-top: 5px;
+  margin-top: 10px;
   font-size: 12px;
 `
 const shakeAnimation = keyframes`

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAuthenticated, setEmail, setPassword, setError } from '../reducers/userSlice'
+import { setUserAuthenticated, setError } from '../reducers/userSlice'
+import { setCurrentUser } from '../reducers/authSlice'
 import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/react'
@@ -21,15 +22,19 @@ export const Login = () => {
     const foundUser = users.find((user) => user.email === email)
 
     if (foundUser && foundUser.password === password) {
-      //Successful login
-      dispatch(setAuthenticated({ authenticated: true, email, password }))
-      dispatch(setError('')) //Clear error message in Redux state
 
-      const user = {
-        email,
+      const userData = {
+        username: foundUser.username,
+        email: foundUser.email,
       }
 
-      localStorage.setItem('userData', JSON.stringify(user))
+      localStorage.setItem('userData', JSON.stringify({ email, password, username: foundUser.username, authenticated: true }))
+
+      //Successful login
+      dispatch(setUserAuthenticated({ authenticated: true, email, password }))  
+      dispatch(setError('')) //Clear error message in Redux state
+      dispatch(setCurrentUser(userData)) //Dispatch action to set current user after successful login
+
       navigate('/home') // Navigate to the '/home' route after successful login
     } else {
       // Unsuccessful login 
@@ -38,6 +43,7 @@ export const Login = () => {
 
     console.log("user: ", users)
     console.log("email: ", email)
+    console.log("username: ", foundUser.username)
   }
 
   return (
