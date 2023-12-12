@@ -119,7 +119,7 @@ const Input = styled.input`
 
 const SubmitButton = styled.button`
   background-color: var(--button-color);
-  color: white;
+  color: black;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;

@@ -59,16 +59,27 @@ const ContentContainer = styled.div`
 
 const FlexContainer = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   gap: 10px;
-`;
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+
+    & > div {
+      max-width: 90%; 
+      margin: 0 auto; 
+    }
+  }
+`
 
 const ImageContainer = styled.div`
   flex: 2;
   max-width: 25%;
   overflow: hidden; 
   border-radius: 4px; 
+
   img {
     width: 100%; 
     height: auto; 
@@ -93,7 +104,7 @@ const WelcomeSubHeader = styled.h2`
 
 const Button = styled.button`
   background-color: var(--button-color);
-  color: white;
+  color: black;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -107,13 +118,17 @@ const Button = styled.button`
 
 const LogoContainer = styled.div`
   margin: 0 auto;
-  max-width: 180px; 
-  padding: 10px 10px 50px 10px;
+  max-width: 60%; 
+  padding: 10px 10px 25px 10px;
   
   img {
     width: 100%; 
     height: auto; 
     display: block;
     margin: 0 auto; 
+  }
+
+  @media (min-width: 768px) {
+    max-width: 45%;
   }
 `

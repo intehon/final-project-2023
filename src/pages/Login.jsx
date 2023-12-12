@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserAuthenticated, setError } from '../reducers/userSlice'
-import { setCurrentUser } from '../reducers/authSlice'
 import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/react'
@@ -96,7 +95,7 @@ const Input = styled.input`
 
 const SubmitButton = styled.button`
   background-color: var(--button-color);
-  color: white;
+  color: black;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;

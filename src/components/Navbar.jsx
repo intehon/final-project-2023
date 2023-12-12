@@ -133,7 +133,7 @@ const NavButton = styled.button`
   align-items: center;
   justify-content: center;
   background-color: var(--button-color);
-  color: white;
+  color: black;
   padding: 5px 10px;
   border: none;
   border-radius: 4px;
@@ -151,7 +151,7 @@ const NavButton = styled.button`
 
 const NavBarText = styled.p`
   font-size: 12px;
-  color: rgb(162, 162, 162);
+  color: black;
 `
 
 const TextWrapper = styled.div`
