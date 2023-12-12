@@ -77,14 +77,14 @@ const FlexContainer = styled.div`
 const ImageContainer = styled.div`
   flex: 2;
   max-width: 25%;
-  overflow: hidden; 
-  border-radius: 4px; 
+  overflow: hidden;
+  border-radius: 4px;
 
   img {
-    width: 100%; 
-    height: auto; 
+    width: 100%;
+    height: auto;
     display: block;
-    max-width: 100%; 
+    max-width: 100%;
   }
 `
 
@@ -118,7 +118,7 @@ const Button = styled.button`
 
 const LogoContainer = styled.div`
   margin: 0 auto;
-  max-width: 60%; 
+  max-width: 40%; 
   padding: 10px 10px 25px 10px;
   
   img {
@@ -126,9 +126,5 @@ const LogoContainer = styled.div`
     height: auto; 
     display: block;
     margin: 0 auto; 
-  }
-
-  @media (min-width: 768px) {
-    max-width: 45%;
   }
 `
