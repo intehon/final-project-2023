@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react';
 
 export const NotFoundPage = () => {
   const navigate = useNavigate();
 
   // Redirect to the '/home' route when the 404 page is rendered
-  React.useEffect(() => {
+  useEffect(() => {
     navigate('/home')
   }, [navigate])
 
