@@ -74,14 +74,14 @@ export const ItemListing = () => {
 
   const handleXShare = (item) => {
     const text = `Check out this item: ${item.title}`
-    const url = `https://final-project-2023.netlify.app/items/${item.id}`
+    const url = `https://share-shelf.netlify.app/items/${item.id}`
     const hashtags = 'ShareShelfSustain,2030ReuseRevolution'
   
-    const twitterBaseUrl = 'https://twitter.com/intent/tweet?'
-    const tweetParams = new URLSearchParams({ text, url, hashtags })
-    const twitterShareUrl = `${twitterBaseUrl}${tweetParams.toString()}`
+    const xBaseUrl = 'https://x.com/intent/tweet?'
+    const xParams = new URLSearchParams({ text, url, hashtags })
+    const xShareUrl = `${xBaseUrl}${xParams.toString()}`
   
-    window.open(twitterShareUrl, '_blank');
+    window.open(xShareUrl, '_blank');
   }
 
   const reversedItems = [...items].reverse()
