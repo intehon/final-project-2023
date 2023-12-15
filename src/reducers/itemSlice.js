@@ -54,4 +54,8 @@ const itemSlice = createSlice({
 })
 
 export const { addItem, claimItem, deleteItem, setItems } = itemSlice.actions
+
+//selector
+export const selectItemById = (state, itemId) => state.items.items.find(item => item.id === itemId)
+
 export default itemSlice.reducer

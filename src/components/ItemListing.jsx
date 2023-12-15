@@ -1,20 +1,24 @@
-import { Loading } from './Loading'
+import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { claimItem, deleteItem, setItems } from '../reducers/itemSlice'
 import styled from '@emotion/styled'
-import { useState, useEffect } from 'react'
 import moment from 'moment/moment'
-import { FiShoppingCart } from "react-icons/fi"
-import { FiHeart } from "react-icons/fi"
-import { RiDeleteBinLine } from "react-icons/ri"
+import { Loading } from './Loading'
+import { FiShoppingCart, FiHeart, FiInstagram } from "react-icons/fi"
+import { RiTwitterXFill } from "react-icons/ri"
+// import { RiDeleteBinLine } from "react-icons/ri"
 import treasure from '../assets/treasuechest.png'
 import paperPlane from '../assets/paperplane.jpg'
+import html2canvas from 'html2canvas'
 
 export const ItemListing = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const items = useSelector((state) => state.items.items)
   const userId = useSelector((state) => state.user.userId)
+  const itemRefs = useRef({})
+  const navigate = useNavigate()
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -28,9 +32,9 @@ export const ItemListing = () => {
     dispatch(claimItem(itemId))
   }
 
-  const handleDeleteItem = (itemId) => {
-    dispatch(deleteItem(itemId))
-  }
+  // const handleDeleteItem = (itemId) => {
+  //   dispatch(deleteItem(itemId))
+  // }
 
   const handleLikeItem = (itemId) => {
     const updatedItems = items.map((item) => {
@@ -44,6 +48,40 @@ export const ItemListing = () => {
     if (JSON.stringify(updatedItems) !== JSON.stringify(items)) {
       dispatch(setItems(updatedItems))
     }
+  }
+
+  const handleNavigateToItemDetail = (itemId) => {
+    navigate(`/items/${itemId}`)
+  }
+
+  const handleInstagramShare = async (itemId) => {
+    const itemElement = itemRefs.current[itemId]
+    if (!itemElement) return
+
+    try {
+      const canvas = await html2canvas(itemElement)
+      const image = canvas.toDataURL('image/png')
+      const link = document.createElement('a')
+      link.href = image
+      link.download = `share-item-${itemId}.png`
+      link.click()
+
+      alert("Your image is downloaded! Open Instagram and upload this image to share with your friends.")
+    } catch (error) {
+      console.error('Error generating image: ', error)
+    }
+  }
+
+  const handleXShare = (item) => {
+    const text = `Check out this item: ${item.title}`
+    const url = `https://final-project-2023.netlify.app/items/${item.id}`
+    const hashtags = 'ShareShelfSustain,2030ReuseRevolution'
+  
+    const twitterBaseUrl = 'https://twitter.com/intent/tweet?'
+    const tweetParams = new URLSearchParams({ text, url, hashtags })
+    const twitterShareUrl = `${twitterBaseUrl}${tweetParams.toString()}`
+  
+    window.open(twitterShareUrl, '_blank');
   }
 
   const reversedItems = [...items].reverse()
@@ -63,10 +101,10 @@ export const ItemListing = () => {
         ) : (
           <div>
             {reversedItems.map((item) => (
-             <ItemContainer key={item.id}>
+             <ItemContainer key={item.id} ref={el => itemRefs.current[item.id] = el}>
             {item.imageUrl ? (
               <ImageContainer>
-              <Image src={item.imageUrl} alt={item.title} />
+              <Image src={item.imageUrl} alt={item.title} onClick={() => handleNavigateToItemDetail(item.id)}/>
               </ImageContainer>
             ) : (
               <DefaultImage src={treasure} alt="Default Image" />
@@ -75,9 +113,9 @@ export const ItemListing = () => {
                  <ActionButton onClick={() => handleClaimItem(item.id)} isClicked={item.isClaimed}>
                    <FiShoppingCart />
                  </ActionButton>
-                 <ActionButton onClick={() => handleDeleteItem(item.id)}>
+                 {/* <ActionButton onClick={() => handleDeleteItem(item.id)}>
                    <RiDeleteBinLine />
-                 </ActionButton>
+                 </ActionButton> */}
                  <ActionButton
                    isClicked={item.likes && item.likes.includes(userId)}
                    onClick={() => handleLikeItem(item.id)}
@@ -86,9 +124,15 @@ export const ItemListing = () => {
                  >
                    <FiHeart />
                  </ActionButton>
+                 <ActionButton onClick={() => handleInstagramShare(item.id)}>
+                  <FiInstagram />
+                 </ActionButton>
+                 <ActionButton onClick={() => handleXShare(item)}>
+                  <RiTwitterXFill />
+                 </ActionButton>
                </ActionContainer>
                  <DescriptionContainer>
-                   <Title>{item.title}</Title>
+                 <Title onClick={() => handleNavigateToItemDetail(item.id)}>{item.title}</Title>
                    <Description>{item.description}</Description>
                  </DescriptionContainer>
                  <UserDetails>
