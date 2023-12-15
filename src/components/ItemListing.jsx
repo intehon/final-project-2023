@@ -10,7 +10,7 @@ import { RiTwitterXFill } from "react-icons/ri"
 // import { RiDeleteBinLine } from "react-icons/ri"
 import treasure from '../assets/treasuechest.png'
 import paperPlane from '../assets/paperplane.jpg'
-import html2canvas from 'html2canvas'
+import DomToImage from 'dom-to-image'
 
 export const ItemListing = () => {
   const dispatch = useDispatch()
@@ -57,15 +57,21 @@ export const ItemListing = () => {
   const handleInstagramShare = async (itemId) => {
     const itemElement = itemRefs.current[itemId]
     if (!itemElement) return
-
+  
     try {
-      const canvas = await html2canvas(itemElement)
-      const image = canvas.toDataURL('image/png')
+      const options = {
+        width: itemElement.scrollWidth,
+        height: itemElement.scrollHeight,
+        style: {
+          transform: 'scale(0.5)',
+        },
+      }
+      const blob = await DomToImage.toBlob(itemElement, options);
       const link = document.createElement('a')
-      link.href = image
+      link.href = URL.createObjectURL(blob)
       link.download = `share-item-${itemId}.png`
       link.click()
-
+  
       alert("Your image is downloaded! Open Instagram and upload this image to share with your friends.")
     } catch (error) {
       console.error('Error generating image: ', error)
